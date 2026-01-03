@@ -79,7 +79,7 @@ include __DIR__ . '/includes/header.php';
     <div class="card mb-4">
         <div class="card-body">
             <form method="GET" class="row g-3 align-items-end">
-                <div class="col-md-3">
+                <div class="col-md-2">
                     <label class="form-label">الحالة</label>
                     <select name="status" class="form-select">
                         <option value="">الكل</option>
@@ -89,9 +89,27 @@ include __DIR__ . '/includes/header.php';
                     </select>
                 </div>
                 <div class="col-md-2">
+                    <label class="form-label">من تاريخ</label>
+                    <input type="date" name="date_from" class="form-control" value="<?= $_GET['date_from'] ?? '' ?>">
+                </div>
+                <div class="col-md-2">
+                    <label class="form-label">إلى تاريخ</label>
+                    <input type="date" name="date_to" class="form-control" value="<?= $_GET['date_to'] ?? '' ?>">
+                </div>
+                <div class="col-md-2">
                     <button type="submit" class="btn btn-primary w-100">
                         <i class="fas fa-filter me-1"></i> تصفية
                     </button>
+                </div>
+                <div class="col-md-4 text-end">
+                    <div class="btn-group">
+                        <a href="export-leads.php?<?= http_build_query($_GET) ?>&format=csv" class="btn btn-success">
+                            <i class="fas fa-file-csv me-1"></i> تصدير CSV
+                        </a>
+                        <a href="export-leads.php?<?= http_build_query($_GET) ?>&format=xlsx" class="btn btn-info">
+                            <i class="fas fa-file-excel me-1"></i> تصدير Excel
+                        </a>
+                    </div>
                 </div>
             </form>
         </div>

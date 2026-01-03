@@ -34,9 +34,19 @@ RewriteRule ^contact/?$ pages/contact.php [L]
 RewriteRule ^privacy/?$ pages/privacy.php [L]
 RewriteRule ^terms/?$ pages/terms.php [L]
 
+# User pages
+RewriteRule ^favorites/?$ pages/favorites.php [L]
+RewriteRule ^login/?$ pages/login.php [L]
+RewriteRule ^register/?$ pages/register.php [L]
+RewriteRule ^add-property/?$ pages/add-property.php [L]
+RewriteRule ^my-properties/?$ pages/my-properties.php [L]
+RewriteRule ^profile/?$ pages/profile.php [L]
+
 # API endpoints
 RewriteRule ^api/leads/?$ api/leads.php [L]
 RewriteRule ^api/properties/?$ api/properties.php [L]
+RewriteRule ^api/favorites/?$ api/favorites.php [L]
+RewriteRule ^api/ai/?$ api/ai.php [L]
 
 # Prevent directory listing
 Options -Indexes

@@ -72,8 +72,18 @@ try {
     if ($result) {
         $leadId = db()->lastInsertId();
 
-        // TODO: Send notification email to admin
-        // TODO: Send SMS/WhatsApp confirmation to user
+        // Send email notifications
+        require_once __DIR__ . '/../includes/email-service.php';
+        $leadData = [
+            'id' => $leadId,
+            'name' => $name,
+            'phone' => $phone,
+            'email' => $email,
+            'message' => $message,
+            'purpose' => $purpose,
+            'property_id' => $propertyId
+        ];
+        sendEmailNotification('new_lead', $leadData);
 
         jsonResponse([
             'success' => true,
