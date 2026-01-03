@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO Tags -->
+    <title>بي تاج | شقق وفلل للبيع والإيجار في مصر - اكتشف بيتك الجديد</title>
+    <meta name="title" content="بي تاج | شقق وفلل للبيع والإيجار في مصر">
+    <meta name="description" content="أكبر منصة عقارية في مصر. ابحث عن شقق، فلل، أراضي ومحلات للبيع والإيجار في القاهرة الجديدة، الشيخ زايد، العاصمة الإدارية والمزيد. أسعار محدثة يومياً.">
+    <meta name="keywords" content="عقارات مصر، شقق للبيع، فلل للبيع، إيجار شقق، القاهرة الجديدة، التجمع الخامس، الشيخ زايد، العاصمة الإدارية، كمبوندات مصر">
+    <meta name="author" content="بي تاج">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://betag.com/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://betag.com/">
+    <meta property="og:title" content="بي تاج | شقق وفلل للبيع والإيجار في مصر">
+    <meta property="og:description" content="أكبر منصة عقارية في مصر. ابحث عن شقق، فلل، أراضي ومحلات للبيع والإيجار. أسعار محدثة يومياً.">
+    <meta property="og:image" content="https://betag.com/images/og-image.jpg">
+    <meta property="og:locale" content="ar_EG">
+    <meta property="og:site_name" content="بي تاج">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://betag.com/">
+    <meta property="twitter:title" content="بي تاج | شقق وفلل للبيع والإيجار في مصر">
+    <meta property="twitter:description" content="أكبر منصة عقارية في مصر. ابحث عن شقق، فلل، أراضي ومحلات للبيع والإيجار.">
+    <meta property="twitter:image" content="https://betag.com/images/og-image.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/images/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts (Cairo) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Google Analytics - Replace GA_MEASUREMENT_ID with your ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+
+    <!-- Meta Pixel Code - Replace PIXEL_ID with your ID -->
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'PIXEL_ID');
+        fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=PIXEL_ID&ev=PageView&noscript=1"/></noscript>
+
+    <style>
+        * {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(135deg, rgba(30, 58, 138, 0.85), rgba(37, 99, 235, 0.75)),
+                              url("https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&q=80&w=2000");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .search-tab.active {
+            color: #2563eb;
+            border-bottom: 3px solid #2563eb;
+            font-weight: 700;
+        }
+
+        .city-card {
+            background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+            transition: all 0.3s ease;
+        }
+        .city-card:hover {
+            background: linear-gradient(135deg, #2563eb, #1d4ed8);
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .floating-cta {
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .skeleton {
+            background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+            background-size: 200% 100%;
+            animation: loading 1.5s infinite;
+        }
+        @keyframes loading {
+            0% { background-position: 200% 0; }
+            100% { background-position: -200% 0; }
+        }
+
+        /* Hide scrollbar for search suggestions */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+
+    <!-- Structured Data (JSON-LD) for SEO -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "RealEstateAgent",
+        "name": "بي تاج",
+        "description": "أكبر منصة عقارية في مصر للبيع والإيجار",
+        "url": "https://betag.com",
+        "logo": "https://betag.com/images/logo.png",
+        "sameAs": [
+            "https://facebook.com/betag",
+            "https://twitter.com/betag",
+            "https://instagram.com/betag"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "EG",
+            "addressLocality": "القاهرة"
+        },
+        "areaServed": {
+            "@type": "Country",
+            "name": "Egypt"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50 text-right">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="/" class="flex items-center gap-2">
+                <div class="bg-primary-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-house text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold text-primary-900">بي تاج</span>
+            </a>
+
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex gap-8 items-center text-gray-600 font-medium">
+                <a href="/" class="text-primary-600 font-bold">الرئيسية</a>
+                <a href="/pages/search.html?type=sale" class="hover:text-primary-600 transition">شقق للبيع</a>
+                <a href="/pages/search.html?type=rent" class="hover:text-primary-600 transition">شقق للإيجار</a>
+                <a href="/pages/compounds.html" class="hover:text-primary-600 transition">دليل الكمبوندات</a>
+                <a href="/pages/new-projects.html" class="hover:text-primary-600 transition">مشاريع جديدة</a>
+            </nav>
+
+            <!-- Actions -->
+            <div class="hidden md:flex items-center gap-4">
+                <a href="/pages/login.html" class="text-primary-600 font-semibold hover:underline">تسجيل دخول</a>
+                <a href="/pages/add-property.html" class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition shadow-md">
+                    <i class="fa-solid fa-plus ml-2"></i>أضف عقارك مجاناً
+                </a>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-btn" class="md:hidden text-gray-700 text-2xl" aria-label="القائمة">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Nav -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-gray-100 p-4 absolute w-full shadow-lg">
+            <div class="flex flex-col gap-4 text-gray-700 font-medium">
+                <a href="/" class="flex items-center gap-2"><i class="fa-solid fa-home w-5"></i> الرئيسية</a>
+                <a href="/pages/search.html?type=sale" class="flex items-center gap-2"><i class="fa-solid fa-tag w-5"></i> شقق للبيع</a>
+                <a href="/pages/search.html?type=rent" class="flex items-center gap-2"><i class="fa-solid fa-key w-5"></i> شقق للإيجار</a>
+                <a href="/pages/compounds.html" class="flex items-center gap-2"><i class="fa-solid fa-building w-5"></i> دليل الكمبوندات</a>
+                <hr class="border-gray-100">
+                <a href="/pages/add-property.html" class="bg-primary-600 text-white text-center py-3 rounded-lg font-bold">
+                    أضف عقارك مجاناً
+                </a>
+                <a href="/pages/login.html" class="text-primary-600 text-center">تسجيل الدخول</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-[550px] flex items-center justify-center py-16">
+        <div class="text-center w-full max-w-5xl px-4">
+            <h1 class="text-3xl md:text-5xl font-extrabold text-white mb-4 leading-tight">
+                اكتشف بيتك الجديد في مصر
+            </h1>
+            <p class="text-blue-100 text-lg mb-8 max-w-2xl mx-auto">
+                أكثر من <span class="text-yellow-400 font-bold">50,000</span> عقار متاح للبيع والإيجار
+            </p>
+
+            <!-- Search Box -->
+            <div class="bg-white p-5 rounded-2xl shadow-2xl max-w-4xl mx-auto">
+                <!-- Search Tabs -->
+                <div class="flex gap-6 mb-4 border-b border-gray-200 pb-3">
+                    <button class="search-tab active pb-2 text-lg" data-type="sale">
+                        <i class="fa-solid fa-tag ml-2"></i>شراء
+                    </button>
+                    <button class="search-tab pb-2 text-gray-500 text-lg" data-type="rent">
+                        <i class="fa-solid fa-key ml-2"></i>إيجار
+                    </button>
+                </div>
+
+                <!-- Search Form -->
+                <form id="search-form" action="/pages/search.html" method="GET" class="flex flex-col md:flex-row gap-4">
+                    <input type="hidden" name="type" id="search-type" value="sale">
+
+                    <!-- Location Input -->
+                    <div class="flex-1 relative">
+                        <i class="fa-solid fa-location-dot absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input
+                            type="text"
+                            name="location"
+                            id="location-input"
+                            placeholder="ابحث بالمنطقة، الحي، أو الكمبوند"
+                            class="w-full pl-12 pr-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-right text-lg"
+                            autocomplete="off"
+                        >
+                        <!-- Suggestions Dropdown -->
+                        <div id="location-suggestions" class="hidden absolute w-full bg-white border border-gray-200 rounded-xl mt-1 shadow-lg z-10 max-h-60 overflow-y-auto hide-scrollbar">
+                        </div>
+                    </div>
+
+                    <!-- Property Type -->
+                    <select name="property_type" class="w-full md:w-48 py-3 px-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-primary-500 text-gray-600 bg-white text-lg">
+                        <option value="">نوع العقار</option>
+                        <option value="apartment">شقة</option>
+                        <option value="villa">فيلا</option>
+                        <option value="duplex">دوبلكس</option>
+                        <option value="studio">ستوديو</option>
+                        <option value="land">أرض</option>
+                        <option value="commercial">محل تجاري</option>
+                        <option value="office">مكتب إداري</option>
+                    </select>
+
+                    <!-- Search Button -->
+                    <button type="submit" class="bg-primary-600 text-white font-bold py-3 px-8 rounded-xl hover:bg-primary-700 transition flex items-center justify-center gap-2 text-lg shadow-lg hover:shadow-xl">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        ابحث الآن
+                    </button>
+                </form>
+
+                <!-- Quick Links -->
+                <div class="flex flex-wrap gap-2 mt-4 text-sm">
+                    <span class="text-gray-500">بحث سريع:</span>
+                    <a href="/pages/search.html?location=new-cairo" class="text-primary-600 hover:underline">التجمع الخامس</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="/pages/search.html?location=sheikh-zayed" class="text-primary-600 hover:underline">الشيخ زايد</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="/pages/search.html?location=new-capital" class="text-primary-600 hover:underline">العاصمة الإدارية</a>
+                    <span class="text-gray-300">|</span>
+                    <a href="/pages/search.html?location=maadi" class="text-primary-600 hover:underline">المعادي</a>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="flex justify-center gap-8 md:gap-16 mt-10 text-white">
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-yellow-400">+50K</div>
+                    <div class="text-blue-200 text-sm">عقار متاح</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-yellow-400">+10K</div>
+                    <div class="text-blue-200 text-sm">عميل سعيد</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-3xl md:text-4xl font-bold text-yellow-400">+200</div>
+                    <div class="text-blue-200 text-sm">كمبوند</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Properties Section -->
+    <section class="container mx-auto px-4 py-16">
+        <div class="flex justify-between items-end mb-8">
+            <div>
+                <h2 class="text-3xl font-bold text-gray-900 mb-2">عقارات مميزة لك</h2>
+                <p class="text-gray-500">أحدث العقارات المضافة هذا الأسبوع</p>
+            </div>
+            <a href="/pages/search.html?featured=true" class="hidden md:flex items-center gap-2 text-primary-600 font-bold hover:gap-3 transition-all">
+                عرض الكل <i class="fa-solid fa-arrow-left"></i>
+            </a>
+        </div>
+
+        <!-- Properties Grid -->
+        <div id="properties-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Properties will be loaded via JavaScript -->
+        </div>
+
+        <a href="/pages/search.html" class="md:hidden flex justify-center mt-8">
+            <button class="w-full bg-white border-2 border-gray-200 py-3 rounded-xl font-bold text-gray-700 hover:border-primary-500 hover:text-primary-600 transition">
+                عرض كل العقارات
+            </button>
+        </a>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">تصفح حسب نوع العقار</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4" id="categories-grid">
+                <!-- Categories injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Lead Capture Section -->
+    <section class="bg-gradient-to-br from-primary-900 via-primary-800 to-primary-900 text-white py-20 px-4">
+        <div class="container mx-auto max-w-5xl flex flex-col md:flex-row items-center justify-between gap-12">
+            <div class="md:w-1/2 text-right">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">هل تبحث عن عقار ولم تجده؟</h2>
+                <p class="text-blue-200 text-lg mb-6">
+                    سجل طلبك الآن وسيتم التواصل معك من قبل أفضل الوسطاء العقاريين لمساعدتك في إيجاد منزلك المثالي.
+                </p>
+                <ul class="space-y-3 text-blue-100 mb-6">
+                    <li class="flex items-center gap-3">
+                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-check text-xs text-white"></i>
+                        </div>
+                        توفير وقت البحث
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-check text-xs text-white"></i>
+                        </div>
+                        عروض حصرية غير معروضة
+                    </li>
+                    <li class="flex items-center gap-3">
+                        <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-check text-xs text-white"></i>
+                        </div>
+                        استشارة عقارية مجانية
+                    </li>
+                </ul>
+            </div>
+
+            <div class="bg-white p-8 rounded-2xl w-full md:w-2/5 shadow-2xl text-gray-800">
+                <h3 class="text-xl font-bold mb-6 text-center text-gray-900">سجل طلبك الآن</h3>
+                <form id="lead-form" class="space-y-4">
+                    <div>
+                        <input type="text" name="name" placeholder="الاسم بالكامل" required
+                            class="w-full border-2 border-gray-200 p-3 rounded-xl bg-gray-50 focus:bg-white focus:border-primary-500 transition outline-none">
+                    </div>
+                    <div>
+                        <input type="tel" name="phone" placeholder="رقم الهاتف" required pattern="[0-9]{10,15}"
+                            class="w-full border-2 border-gray-200 p-3 rounded-xl bg-gray-50 focus:bg-white focus:border-primary-500 transition outline-none">
+                    </div>
+                    <div>
+                        <select name="purpose" required class="w-full border-2 border-gray-200 p-3 rounded-xl bg-gray-50 focus:bg-white focus:border-primary-500 transition outline-none">
+                            <option value="">الغرض</option>
+                            <option value="buy">شراء</option>
+                            <option value="rent">إيجار</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select name="area" class="w-full border-2 border-gray-200 p-3 rounded-xl bg-gray-50 focus:bg-white focus:border-primary-500 transition outline-none">
+                            <option value="">المنطقة المفضلة (اختياري)</option>
+                            <option value="new-cairo">القاهرة الجديدة</option>
+                            <option value="sheikh-zayed">الشيخ زايد</option>
+                            <option value="6-october">6 أكتوبر</option>
+                            <option value="new-capital">العاصمة الإدارية</option>
+                            <option value="maadi">المعادي</option>
+                            <option value="nasr-city">مدينة نصر</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="w-full bg-primary-600 hover:bg-primary-700 text-white font-bold py-4 rounded-xl shadow-lg transform active:scale-95 transition text-lg">
+                        <i class="fa-solid fa-paper-plane ml-2"></i>
+                        أرسل الطلب مجاناً
+                    </button>
+                    <p class="text-xs text-gray-500 text-center">
+                        بالضغط على "أرسل الطلب" أنت توافق على سياسة الخصوصية
+                    </p>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cities Section -->
+    <section class="bg-gray-50 py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-gray-900 mb-2 text-center">ابحث في المدن الأكثر طلباً</h2>
+            <p class="text-gray-500 text-center mb-8">اختر مدينتك المفضلة واستكشف العقارات المتاحة</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="cities-grid">
+                <!-- Cities injected via JS -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section class="bg-white py-16">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-gray-900 mb-2 text-center">لماذا بي تاج؟</h2>
+            <p class="text-gray-500 text-center mb-12">نقدم لك أفضل تجربة بحث عقاري</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-shield-halved text-3xl text-primary-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">عقارات موثوقة</h3>
+                    <p class="text-gray-500">جميع العقارات يتم التحقق منها قبل نشرها لضمان مصداقية البيانات</p>
+                </div>
+
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-clock text-3xl text-green-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">تحديث يومي</h3>
+                    <p class="text-gray-500">أسعار ومعلومات محدثة يومياً لمساعدتك في اتخاذ القرار الصحيح</p>
+                </div>
+
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-yellow-100 rounded-2xl flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-headset text-3xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-2">دعم متواصل</h3>
+                    <p class="text-gray-500">فريق دعم متخصص جاهز لمساعدتك في أي استفسار</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-12 border-t-4 border-primary-600">
+        <div class="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8 text-right">
+            <div>
+                <div class="flex items-center gap-2 mb-4 text-white">
+                    <div class="bg-primary-600 p-2 rounded-lg">
+                        <i class="fa-solid fa-house text-xl"></i>
+                    </div>
+                    <span class="text-2xl font-bold">بي تاج</span>
+                </div>
+                <p class="text-sm leading-relaxed text-gray-400">
+                    أفضل منصة عقارية في مصر والشرق الأوسط. نساعدك في اتخاذ قرارك العقاري بسهولة وثقة من خلال أدوات بحث متطورة وبيانات دقيقة.
+                </p>
+                <div class="flex gap-3 mt-4">
+                    <a href="#" class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center cursor-pointer hover:bg-blue-500 transition">
+                        <i class="fa-brands fa-facebook-f text-white"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-sky-500 rounded-lg flex items-center justify-center cursor-pointer hover:bg-sky-400 transition">
+                        <i class="fa-brands fa-twitter text-white"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-gradient-to-br from-purple-600 to-pink-500 rounded-lg flex items-center justify-center cursor-pointer hover:opacity-80 transition">
+                        <i class="fa-brands fa-instagram text-white"></i>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-red-600 rounded-lg flex items-center justify-center cursor-pointer hover:bg-red-500 transition">
+                        <i class="fa-brands fa-youtube text-white"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4">روابط سريعة</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/pages/search.html?location=new-cairo&type=sale" class="hover:text-primary-400 transition">شقق للبيع في التجمع الخامس</a></li>
+                    <li><a href="/pages/search.html?location=giza&type=rent" class="hover:text-primary-400 transition">شقق للإيجار في الجيزة</a></li>
+                    <li><a href="/pages/search.html?location=sheikh-zayed&property_type=villa" class="hover:text-primary-400 transition">فلل الشيخ زايد</a></li>
+                    <li><a href="/pages/search.html?location=new-capital" class="hover:text-primary-400 transition">عقارات العاصمة الإدارية</a></li>
+                    <li><a href="/pages/search.html?location=sahel" class="hover:text-primary-400 transition">شاليهات الساحل الشمالي</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4">خدماتنا</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="/pages/add-property.html" class="hover:text-primary-400 transition">أضف عقارك</a></li>
+                    <li><a href="/pages/price-guide.html" class="hover:text-primary-400 transition">دليل الأسعار</a></li>
+                    <li><a href="/pages/compounds.html" class="hover:text-primary-400 transition">دليل الكمبوندات</a></li>
+                    <li><a href="/pages/developers.html" class="hover:text-primary-400 transition">المطورين العقاريين</a></li>
+                    <li><a href="/pages/blog.html" class="hover:text-primary-400 transition">المدونة</a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h4 class="text-white font-bold mb-4">تواصل معنا</h4>
+                <div class="flex flex-col gap-3 text-sm">
+                    <a href="tel:19xxx" class="flex items-center gap-2 hover:text-primary-400 transition">
+                        <i class="fa-solid fa-phone w-5"></i> 19xxx
+                    </a>
+                    <a href="mailto:info@betag.com" class="flex items-center gap-2 hover:text-primary-400 transition">
+                        <i class="fa-solid fa-envelope w-5"></i> info@betag.com
+                    </a>
+                    <a href="https://wa.me/201xxxxxxxxx" class="flex items-center gap-2 hover:text-primary-400 transition">
+                        <i class="fa-brands fa-whatsapp w-5"></i> واتساب
+                    </a>
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-location-dot w-5"></i> القاهرة، مصر
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center mt-12 pt-8 border-t border-gray-800 text-sm text-gray-500">
+                <p>جميع الحقوق محفوظة © 2025 بي تاج</p>
+                <div class="flex gap-4 mt-4 md:mt-0">
+                    <a href="/pages/privacy.html" class="hover:text-gray-300">سياسة الخصوصية</a>
+                    <a href="/pages/terms.html" class="hover:text-gray-300">شروط الاستخدام</a>
+                    <a href="/pages/about.html" class="hover:text-gray-300">من نحن</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/201xxxxxxxxx" target="_blank"
+       class="fixed bottom-6 left-6 bg-green-500 text-white w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-green-600 transition z-40 floating-cta"
+       aria-label="تواصل واتساب">
+        <i class="fa-brands fa-whatsapp text-2xl"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="/js/main.js"></script>
+</body>
+</html>
