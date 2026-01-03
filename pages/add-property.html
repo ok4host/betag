@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>أضف عقارك مجاناً | بي تاج</title>
+    <meta name="description" content="أضف عقارك مجاناً على بي تاج وتواصل مع آلاف المشترين والمستأجرين. نشر سريع وسهل.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 900: '#1e3a8a' }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * { font-family: 'Cairo', sans-serif; }
+
+        .step-item.active .step-number {
+            background-color: #2563eb;
+            color: white;
+        }
+        .step-item.completed .step-number {
+            background-color: #22c55e;
+            color: white;
+        }
+        .step-item.completed .step-number i {
+            display: block;
+        }
+        .step-item.completed .step-number span {
+            display: none;
+        }
+
+        .upload-zone {
+            border: 2px dashed #d1d5db;
+            transition: all 0.3s ease;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: #2563eb;
+            background-color: #eff6ff;
+        }
+
+        .image-preview {
+            position: relative;
+        }
+        .image-preview .remove-btn {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            background: #ef4444;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.2s;
+        }
+        .image-preview:hover .remove-btn {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-right">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2">
+                <div class="bg-primary-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-house text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold text-primary-900">بي تاج</span>
+            </a>
+            <a href="/" class="text-gray-600 hover:text-primary-600 flex items-center gap-2">
+                <i class="fa-solid fa-arrow-right"></i>
+                العودة للرئيسية
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <div class="bg-gradient-to-l from-primary-900 to-primary-700 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">أضف عقارك مجاناً</h1>
+            <p class="text-blue-100 text-lg max-w-2xl mx-auto">
+                انشر عقارك الآن وتواصل مع آلاف المشترين والمستأجرين المهتمين
+            </p>
+        </div>
+    </div>
+
+    <!-- Progress Steps -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-6">
+            <div class="flex justify-center items-center gap-4 md:gap-8">
+                <div class="step-item active flex items-center gap-2" data-step="1">
+                    <div class="step-number w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-sm">
+                        <span>1</span>
+                        <i class="fa-solid fa-check text-xs hidden"></i>
+                    </div>
+                    <span class="hidden md:block text-sm font-medium">معلومات أساسية</span>
+                </div>
+                <div class="w-8 md:w-16 h-0.5 bg-gray-200"></div>
+                <div class="step-item flex items-center gap-2" data-step="2">
+                    <div class="step-number w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-sm">
+                        <span>2</span>
+                        <i class="fa-solid fa-check text-xs hidden"></i>
+                    </div>
+                    <span class="hidden md:block text-sm font-medium">تفاصيل العقار</span>
+                </div>
+                <div class="w-8 md:w-16 h-0.5 bg-gray-200"></div>
+                <div class="step-item flex items-center gap-2" data-step="3">
+                    <div class="step-number w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center font-bold text-sm">
+                        <span>3</span>
+                        <i class="fa-solid fa-check text-xs hidden"></i>
+                    </div>
+                    <span class="hidden md:block text-sm font-medium">الصور والتواصل</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form Container -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="max-w-3xl mx-auto">
+            <form id="add-property-form">
+
+                <!-- Step 1: Basic Info -->
+                <div class="form-step" data-step="1">
+                    <div class="bg-white rounded-2xl shadow-md p-6 md:p-8">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">
+                            <i class="fa-solid fa-info-circle text-primary-600 ml-2"></i>
+                            المعلومات الأساسية
+                        </h2>
+
+                        <div class="space-y-6">
+                            <!-- Transaction Type -->
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-3">نوع المعاملة *</label>
+                                <div class="grid grid-cols-2 gap-4">
+                                    <label class="relative">
+                                        <input type="radio" name="transaction_type" value="sale" class="peer sr-only" required>
+                                        <div class="border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition">
+                                            <i class="fa-solid fa-tag text-2xl text-gray-400 peer-checked:text-primary-600 mb-2"></i>
+                                            <p class="font-bold">بيع</p>
+                                        </div>
+                                    </label>
+                                    <label class="relative">
+                                        <input type="radio" name="transaction_type" value="rent" class="peer sr-only">
+                                        <div class="border-2 border-gray-200 rounded-xl p-4 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition">
+                                            <i class="fa-solid fa-key text-2xl text-gray-400 peer-checked:text-primary-600 mb-2"></i>
+                                            <p class="font-bold">إيجار</p>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Property Type -->
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-3">نوع العقار *</label>
+                                <div class="grid grid-cols-3 md:grid-cols-4 gap-3">
+                                    <label class="relative">
+                                        <input type="radio" name="property_type" value="apartment" class="peer sr-only" required>
+                                        <div class="border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition text-sm">
+                                            <i class="fa-solid fa-building text-xl text-gray-400 mb-1"></i>
+                                            <p class="font-medium">شقة</p>
+                                        </div>
+                                    </label>
+                                    <label class="relative">
+                                        <input type="radio" name="property_type" value="villa" class="peer sr-only">
+                                        <div class="border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition text-sm">
+                                            <i class="fa-solid fa-house-chimney text-xl text-gray-400 mb-1"></i>
+                                            <p class="font-medium">فيلا</p>
+                                        </div>
+                                    </label>
+                                    <label class="relative">
+                                        <input type="radio" name="property_type" value="duplex" class="peer sr-only">
+                                        <div class="border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition text-sm">
+                                            <i class="fa-solid fa-layer-group text-xl text-gray-400 mb-1"></i>
+                                            <p class="font-medium">دوبلكس</p>
+                                        </div>
+                                    </label>
+                                    <label class="relative">
+                                        <input type="radio" name="property_type" value="studio" class="peer sr-only">
+                                        <div class="border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition text-sm">
+                                            <i class="fa-solid fa-door-open text-xl text-gray-400 mb-1"></i>
+                                            <p class="font-medium">ستوديو</p>
+                                        </div>
+                                    </label>
+                                    <label class="relative">
+                                        <input type="radio" name="property_type" value="chalet" class="peer sr-only">
+                                        <div class="border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition text-sm">
+                                            <i class="fa-solid fa-umbrella-beach text-xl text-gray-400 mb-1"></i>
+                                            <p class="font-medium">شاليه</p>
+                                        </div>
+                                    </label>
+                                    <label class="relative">
+                                        <input type="radio" name="property_type" value="land" class="peer sr-only">
+                                        <div class="border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition text-sm">
+                                            <i class="fa-solid fa-mountain-sun text-xl text-gray-400 mb-1"></i>
+                                            <p class="font-medium">أرض</p>
+                                        </div>
+                                    </label>
+                                    <label class="relative">
+                                        <input type="radio" name="property_type" value="commercial" class="peer sr-only">
+                                        <div class="border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition text-sm">
+                                            <i class="fa-solid fa-store text-xl text-gray-400 mb-1"></i>
+                                            <p class="font-medium">محل</p>
+                                        </div>
+                                    </label>
+                                    <label class="relative">
+                                        <input type="radio" name="property_type" value="office" class="peer sr-only">
+                                        <div class="border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition text-sm">
+                                            <i class="fa-solid fa-briefcase text-xl text-gray-400 mb-1"></i>
+                                            <p class="font-medium">مكتب</p>
+                                        </div>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Title -->
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">عنوان الإعلان *</label>
+                                <input type="text" name="title" required placeholder="مثال: شقة فاخرة للبيع في التجمع الخامس"
+                                    class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none transition">
+                                <p class="text-sm text-gray-500 mt-1">اكتب عنواناً واضحاً يصف العقار</p>
+                            </div>
+
+                            <!-- Location -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">المحافظة *</label>
+                                    <select name="governorate" required class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none bg-white">
+                                        <option value="">اختر المحافظة</option>
+                                        <option value="cairo">القاهرة</option>
+                                        <option value="giza">الجيزة</option>
+                                        <option value="alexandria">الإسكندرية</option>
+                                        <option value="red-sea">البحر الأحمر</option>
+                                        <option value="matrouh">مطروح</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">المنطقة *</label>
+                                    <select name="area" required class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none bg-white">
+                                        <option value="">اختر المنطقة</option>
+                                        <option value="new-cairo">القاهرة الجديدة</option>
+                                        <option value="6-october">6 أكتوبر</option>
+                                        <option value="sheikh-zayed">الشيخ زايد</option>
+                                        <option value="nasr-city">مدينة نصر</option>
+                                        <option value="maadi">المعادي</option>
+                                        <option value="heliopolis">مصر الجديدة</option>
+                                        <option value="new-capital">العاصمة الإدارية</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">العنوان التفصيلي</label>
+                                <input type="text" name="address" placeholder="مثال: شارع التسعين، بجوار مول..."
+                                    class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none transition">
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-end">
+                            <button type="button" onclick="nextStep()" class="bg-primary-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-primary-700 transition flex items-center gap-2">
+                                التالي <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Property Details -->
+                <div class="form-step hidden" data-step="2">
+                    <div class="bg-white rounded-2xl shadow-md p-6 md:p-8">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">
+                            <i class="fa-solid fa-list-check text-primary-600 ml-2"></i>
+                            تفاصيل العقار
+                        </h2>
+
+                        <div class="space-y-6">
+                            <!-- Price -->
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">السعر *</label>
+                                <div class="flex gap-3">
+                                    <input type="number" name="price" required placeholder="0"
+                                        class="flex-1 border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none transition">
+                                    <select name="currency" class="border-2 border-gray-200 rounded-xl px-4 focus:border-primary-500 outline-none bg-white">
+                                        <option value="egp">ج.م</option>
+                                        <option value="usd">$</option>
+                                    </select>
+                                </div>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <input type="checkbox" id="negotiable" name="negotiable" class="w-4 h-4 text-primary-600">
+                                    <label for="negotiable" class="text-sm text-gray-600">السعر قابل للتفاوض</label>
+                                </div>
+                            </div>
+
+                            <!-- Area -->
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">المساحة (م²) *</label>
+                                    <input type="number" name="area" required placeholder="مثال: 150"
+                                        class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">الدور</label>
+                                    <select name="floor" class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none bg-white">
+                                        <option value="">اختر الدور</option>
+                                        <option value="ground">أرضي</option>
+                                        <option value="1">الأول</option>
+                                        <option value="2">الثاني</option>
+                                        <option value="3">الثالث</option>
+                                        <option value="4">الرابع</option>
+                                        <option value="5">الخامس</option>
+                                        <option value="6+">السادس أو أعلى</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Rooms -->
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">غرف النوم</label>
+                                    <select name="bedrooms" class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none bg-white">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5+</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">الحمامات</label>
+                                    <select name="bathrooms" class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none bg-white">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4+</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">غرف المعيشة</label>
+                                    <select name="living_rooms" class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none bg-white">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3+</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">التشطيب</label>
+                                    <select name="finishing" class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none bg-white">
+                                        <option value="super-lux">سوبر لوكس</option>
+                                        <option value="lux">لوكس</option>
+                                        <option value="semi-finished">نصف تشطيب</option>
+                                        <option value="not-finished">بدون تشطيب</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Amenities -->
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-3">المميزات</label>
+                                <div class="grid grid-cols-2 md:grid-cols-3 gap-3">
+                                    <label class="flex items-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary-300 transition">
+                                        <input type="checkbox" name="amenities[]" value="elevator" class="w-4 h-4 text-primary-600">
+                                        <span>مصعد</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary-300 transition">
+                                        <input type="checkbox" name="amenities[]" value="parking" class="w-4 h-4 text-primary-600">
+                                        <span>جراج</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary-300 transition">
+                                        <input type="checkbox" name="amenities[]" value="security" class="w-4 h-4 text-primary-600">
+                                        <span>أمن</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary-300 transition">
+                                        <input type="checkbox" name="amenities[]" value="garden" class="w-4 h-4 text-primary-600">
+                                        <span>حديقة</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary-300 transition">
+                                        <input type="checkbox" name="amenities[]" value="pool" class="w-4 h-4 text-primary-600">
+                                        <span>حمام سباحة</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary-300 transition">
+                                        <input type="checkbox" name="amenities[]" value="ac" class="w-4 h-4 text-primary-600">
+                                        <span>تكييف</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary-300 transition">
+                                        <input type="checkbox" name="amenities[]" value="balcony" class="w-4 h-4 text-primary-600">
+                                        <span>بلكونة</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary-300 transition">
+                                        <input type="checkbox" name="amenities[]" value="furnished" class="w-4 h-4 text-primary-600">
+                                        <span>مفروش</span>
+                                    </label>
+                                    <label class="flex items-center gap-2 p-3 border-2 border-gray-200 rounded-xl cursor-pointer hover:border-primary-300 transition">
+                                        <input type="checkbox" name="amenities[]" value="kitchen" class="w-4 h-4 text-primary-600">
+                                        <span>مطبخ</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Description -->
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">وصف العقار</label>
+                                <textarea name="description" rows="4" placeholder="اكتب وصفاً تفصيلياً للعقار..."
+                                    class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none transition resize-none"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-between">
+                            <button type="button" onclick="prevStep()" class="border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-bold hover:bg-gray-50 transition flex items-center gap-2">
+                                <i class="fa-solid fa-arrow-right"></i> السابق
+                            </button>
+                            <button type="button" onclick="nextStep()" class="bg-primary-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-primary-700 transition flex items-center gap-2">
+                                التالي <i class="fa-solid fa-arrow-left"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Images & Contact -->
+                <div class="form-step hidden" data-step="3">
+                    <div class="bg-white rounded-2xl shadow-md p-6 md:p-8">
+                        <h2 class="text-xl font-bold text-gray-900 mb-6">
+                            <i class="fa-solid fa-images text-primary-600 ml-2"></i>
+                            الصور ومعلومات التواصل
+                        </h2>
+
+                        <div class="space-y-6">
+                            <!-- Image Upload -->
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-3">صور العقار *</label>
+                                <div id="upload-zone" class="upload-zone rounded-xl p-8 text-center cursor-pointer">
+                                    <i class="fa-solid fa-cloud-arrow-up text-4xl text-gray-400 mb-3"></i>
+                                    <p class="text-gray-600 font-medium">اسحب الصور هنا أو اضغط للاختيار</p>
+                                    <p class="text-sm text-gray-500 mt-1">PNG, JPG حتى 5 ميجا - 10 صور كحد أقصى</p>
+                                    <input type="file" id="image-input" accept="image/*" multiple class="hidden">
+                                </div>
+                                <div id="image-preview-container" class="grid grid-cols-3 md:grid-cols-5 gap-3 mt-4"></div>
+                            </div>
+
+                            <hr class="border-gray-200">
+
+                            <!-- Contact Info -->
+                            <h3 class="text-lg font-bold text-gray-800">معلومات التواصل</h3>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">الاسم *</label>
+                                    <input type="text" name="contact_name" required placeholder="اسمك الكامل"
+                                        class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none transition">
+                                </div>
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">رقم الهاتف *</label>
+                                    <input type="tel" name="contact_phone" required placeholder="01xxxxxxxxx" pattern="01[0-9]{9}"
+                                        class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none transition" dir="ltr">
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">رقم الواتساب</label>
+                                <input type="tel" name="whatsapp" placeholder="01xxxxxxxxx (اختياري)"
+                                    class="w-full border-2 border-gray-200 rounded-xl p-3 focus:border-primary-500 outline-none transition" dir="ltr">
+                                <div class="flex items-center gap-2 mt-2">
+                                    <input type="checkbox" id="same-whatsapp" class="w-4 h-4 text-primary-600">
+                                    <label for="same-whatsapp" class="text-sm text-gray-600">نفس رقم الهاتف</label>
+                                </div>
+                            </div>
+
+                            <!-- Terms -->
+                            <div class="bg-gray-50 rounded-xl p-4">
+                                <label class="flex items-start gap-3 cursor-pointer">
+                                    <input type="checkbox" name="terms" required class="w-5 h-5 text-primary-600 mt-0.5">
+                                    <span class="text-sm text-gray-600">
+                                        أوافق على <a href="/pages/terms.html" class="text-primary-600 hover:underline">شروط الاستخدام</a>
+                                        و<a href="/pages/privacy.html" class="text-primary-600 hover:underline">سياسة الخصوصية</a>
+                                        وأؤكد أن جميع المعلومات المقدمة صحيحة.
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 flex justify-between">
+                            <button type="button" onclick="prevStep()" class="border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-bold hover:bg-gray-50 transition flex items-center gap-2">
+                                <i class="fa-solid fa-arrow-right"></i> السابق
+                            </button>
+                            <button type="submit" class="bg-green-600 text-white px-8 py-3 rounded-xl font-bold hover:bg-green-700 transition flex items-center gap-2">
+                                <i class="fa-solid fa-check"></i> نشر الإعلان
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Success Message (Hidden) -->
+            <div id="success-message" class="hidden">
+                <div class="bg-white rounded-2xl shadow-md p-8 text-center">
+                    <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-check text-4xl text-green-600"></i>
+                    </div>
+                    <h2 class="text-2xl font-bold text-gray-900 mb-2">تم نشر إعلانك بنجاح!</h2>
+                    <p class="text-gray-600 mb-6">سيتم مراجعة إعلانك ونشره خلال ساعات قليلة.</p>
+                    <div class="flex flex-col sm:flex-row gap-3 justify-center">
+                        <a href="/" class="bg-primary-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-primary-700 transition">
+                            العودة للرئيسية
+                        </a>
+                        <button onclick="resetForm()" class="border-2 border-gray-300 text-gray-700 px-6 py-3 rounded-xl font-bold hover:bg-gray-50 transition">
+                            إضافة عقار آخر
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 border-t-4 border-primary-600">
+        <div class="container mx-auto px-4 text-center">
+            <p>جميع الحقوق محفوظة © 2025 بي تاج</p>
+        </div>
+    </footer>
+
+    <script>
+        let currentStep = 1;
+        const totalSteps = 3;
+        let uploadedImages = [];
+
+        // Step Navigation
+        function showStep(step) {
+            document.querySelectorAll('.form-step').forEach(s => s.classList.add('hidden'));
+            document.querySelector(`.form-step[data-step="${step}"]`).classList.remove('hidden');
+
+            // Update progress
+            document.querySelectorAll('.step-item').forEach((item, idx) => {
+                const stepNum = idx + 1;
+                item.classList.remove('active', 'completed');
+                if (stepNum < step) item.classList.add('completed');
+                if (stepNum === step) item.classList.add('active');
+            });
+
+            currentStep = step;
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function nextStep() {
+            if (validateStep(currentStep)) {
+                if (currentStep < totalSteps) {
+                    showStep(currentStep + 1);
+                }
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                showStep(currentStep - 1);
+            }
+        }
+
+        function validateStep(step) {
+            const stepEl = document.querySelector(`.form-step[data-step="${step}"]`);
+            const requiredFields = stepEl.querySelectorAll('[required]');
+            let valid = true;
+
+            requiredFields.forEach(field => {
+                if (!field.value && field.type !== 'radio') {
+                    field.classList.add('border-red-500');
+                    valid = false;
+                } else {
+                    field.classList.remove('border-red-500');
+                }
+            });
+
+            // Check radio groups
+            if (step === 1) {
+                const transactionType = document.querySelector('input[name="transaction_type"]:checked');
+                const propertyType = document.querySelector('input[name="property_type"]:checked');
+                if (!transactionType || !propertyType) {
+                    valid = false;
+                    alert('يرجى اختيار نوع المعاملة ونوع العقار');
+                }
+            }
+
+            return valid;
+        }
+
+        // Image Upload
+        const uploadZone = document.getElementById('upload-zone');
+        const imageInput = document.getElementById('image-input');
+        const previewContainer = document.getElementById('image-preview-container');
+
+        uploadZone.addEventListener('click', () => imageInput.click());
+
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+
+        imageInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+
+        function handleFiles(files) {
+            Array.from(files).forEach(file => {
+                if (uploadedImages.length >= 10) {
+                    alert('الحد الأقصى 10 صور');
+                    return;
+                }
+
+                if (!file.type.startsWith('image/')) return;
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('حجم الصورة يجب أن يكون أقل من 5 ميجا');
+                    return;
+                }
+
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    uploadedImages.push({ file, dataUrl: e.target.result });
+                    renderPreviews();
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        function renderPreviews() {
+            previewContainer.innerHTML = uploadedImages.map((img, idx) => `
+                <div class="image-preview aspect-square rounded-lg overflow-hidden border-2 border-gray-200">
+                    <img src="${img.dataUrl}" class="w-full h-full object-cover">
+                    <button type="button" onclick="removeImage(${idx})" class="remove-btn">
+                        <i class="fa-solid fa-xmark text-xs"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function removeImage(idx) {
+            uploadedImages.splice(idx, 1);
+            renderPreviews();
+        }
+
+        // Same WhatsApp checkbox
+        document.getElementById('same-whatsapp').addEventListener('change', function() {
+            const phoneInput = document.querySelector('input[name="contact_phone"]');
+            const whatsappInput = document.querySelector('input[name="whatsapp"]');
+            if (this.checked) {
+                whatsappInput.value = phoneInput.value;
+                whatsappInput.disabled = true;
+            } else {
+                whatsappInput.disabled = false;
+            }
+        });
+
+        // Form Submit
+        document.getElementById('add-property-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            if (!validateStep(3)) return;
+
+            if (uploadedImages.length === 0) {
+                alert('يرجى إضافة صورة واحدة على الأقل');
+                return;
+            }
+
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> جاري النشر...';
+            submitBtn.disabled = true;
+
+            try {
+                // Simulate API call
+                await new Promise(r => setTimeout(r, 2000));
+
+                // Show success
+                document.getElementById('add-property-form').classList.add('hidden');
+                document.getElementById('success-message').classList.remove('hidden');
+
+                // Track event
+                if (typeof gtag !== 'undefined') {
+                    gtag('event', 'add_property', { method: 'form' });
+                }
+
+            } catch (error) {
+                alert('حدث خطأ، يرجى المحاولة مرة أخرى');
+            } finally {
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            }
+        });
+
+        function resetForm() {
+            document.getElementById('add-property-form').reset();
+            document.getElementById('add-property-form').classList.remove('hidden');
+            document.getElementById('success-message').classList.add('hidden');
+            uploadedImages = [];
+            renderPreviews();
+            showStep(1);
+        }
+    </script>
+</body>
+</html>
