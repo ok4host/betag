@@ -1,0 +1,48 @@
+# BeTaj Real Estate Platform - Robots.txt
+# https://www.robotstxt.org/
+
+User-agent: *
+
+# Allow all pages
+Allow: /
+
+# Block admin area
+Disallow: /admin/
+Disallow: /api/
+Disallow: /config/
+Disallow: /includes/
+
+# Block temporary/private pages
+Disallow: /install.php
+Disallow: /logout
+Disallow: /*?*sort=
+Disallow: /*?*page=
+
+# Allow specific API for structured data
+Allow: /api/properties.php?action=featured
+
+# Sitemap location
+Sitemap: https://betag.com/sitemap.php
+
+# Crawl delay (optional, for polite crawling)
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+Disallow: /admin/
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+Disallow: /admin/
+
+# Block bad bots
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /

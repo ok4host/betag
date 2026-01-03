@@ -388,3 +388,123 @@ function redirect($url) {
     header("Location: $url");
     exit;
 }
+
+// =====================
+// CSRF Protection
+// =====================
+
+function generateCSRF() {
+    startSession();
+    if (empty($_SESSION['csrf_token'])) {
+        $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+    }
+    return $_SESSION['csrf_token'];
+}
+
+function verifyCSRF($token) {
+    startSession();
+    if (empty($_SESSION['csrf_token'])) {
+        return false;
+    }
+    return hash_equals($_SESSION['csrf_token'], $token);
+}
+
+function csrfField() {
+    return '<input type="hidden" name="csrf_token" value="' . generateCSRF() . '">';
+}
+
+// =====================
+// Rate Limiting
+// =====================
+
+function checkRateLimit($key, $limit = 60, $period = 60) {
+    $cacheFile = sys_get_temp_dir() . "/rate_" . md5($key) . ".json";
+
+    $data = [];
+    if (file_exists($cacheFile)) {
+        $data = json_decode(file_get_contents($cacheFile), true) ?: [];
+    }
+
+    $now = time();
+    $data = array_filter($data, fn($t) => $t > $now - $period);
+
+    if (count($data) >= $limit) {
+        return false;
+    }
+
+    $data[] = $now;
+    file_put_contents($cacheFile, json_encode($data));
+    return true;
+}
+
+// =====================
+// Validation Functions
+// =====================
+
+function validateEmail($email) {
+    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+}
+
+function validatePhone($phone) {
+    // Egyptian phone format
+    return preg_match('/^01[0-9]{9}$/', $phone);
+}
+
+function validateImage($file) {
+    if (!is_array($file) || !isset($file['tmp_name'])) {
+        return false;
+    }
+
+    $allowed = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'];
+    $finfo = finfo_open(FILEINFO_MIME_TYPE);
+    $mimeType = finfo_file($finfo, $file['tmp_name']);
+    finfo_close($finfo);
+
+    return in_array($mimeType, $allowed);
+}
+
+// =====================
+// Slug Functions
+// =====================
+
+function createSlug($text) {
+    // Transliterate Arabic
+    $text = mb_strtolower(trim($text), 'UTF-8');
+    $text = preg_replace('/[^\p{L}\p{N}\s-]/u', '', $text);
+    $text = preg_replace('/[\s_]+/', '-', $text);
+    $text = preg_replace('/-+/', '-', $text);
+    $text = trim($text, '-');
+
+    // If Arabic, create unique slug
+    if (preg_match('/[\x{0600}-\x{06FF}]/u', $text)) {
+        return substr(md5($text . time()), 0, 8) . '-' . time();
+    }
+
+    return $text ?: 'item-' . time();
+}
+
+function uniqueSlug($table, $text, $excludeId = null) {
+    $slug = createSlug($text);
+    $originalSlug = $slug;
+    $counter = 1;
+
+    while (true) {
+        $sql = "SELECT id FROM $table WHERE slug = ?";
+        $params = [$slug];
+
+        if ($excludeId) {
+            $sql .= " AND id != ?";
+            $params[] = $excludeId;
+        }
+
+        $stmt = db()->prepare($sql);
+        $stmt->execute($params);
+
+        if (!$stmt->fetch()) {
+            return $slug;
+        }
+
+        $slug = $originalSlug . '-' . $counter;
+        $counter++;
+    }
+}
