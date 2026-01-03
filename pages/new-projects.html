@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشاريع جديدة | بي تاج - أحدث المشاريع العقارية في مصر</title>
+    <meta name="description" content="اكتشف أحدث المشاريع العقارية في مصر. مشاريع تحت الإنشاء بأسعار إطلاق وأنظمة سداد مميزة.">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { primary: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 900: '#1e3a8a' } } } }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { font-family: 'Cairo', sans-serif; }
+        .project-card { transition: all 0.3s ease; }
+        .project-card:hover { transform: translateY(-5px); }
+    </style>
+</head>
+<body class="bg-gray-50 text-right">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2">
+                <div class="bg-primary-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-house text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold text-primary-900">بي تاج</span>
+            </a>
+            <nav class="hidden md:flex gap-8 items-center text-gray-600 font-medium">
+                <a href="/" class="hover:text-primary-600 transition">الرئيسية</a>
+                <a href="/pages/compounds.html" class="hover:text-primary-600 transition">دليل الكمبوندات</a>
+                <a href="/pages/new-projects.html" class="text-primary-600 font-bold">مشاريع جديدة</a>
+            </nav>
+            <a href="/pages/add-property.html" class="hidden md:block bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition">أضف عقارك</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-l from-green-800 to-green-600 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center gap-3 mb-4">
+                <span class="bg-yellow-500 text-yellow-900 px-3 py-1 rounded-full text-sm font-bold animate-pulse">
+                    <i class="fa-solid fa-sparkles"></i> جديد
+                </span>
+            </div>
+            <h1 class="text-3xl md:text-5xl font-bold mb-4">مشاريع جديدة</h1>
+            <p class="text-green-100 text-lg max-w-2xl">
+                اكتشف أحدث المشاريع العقارية تحت الإنشاء بأسعار إطلاق حصرية وأنظمة سداد مرنة تصل حتى 10 سنوات
+            </p>
+        </div>
+    </section>
+
+    <!-- Filters -->
+    <section class="bg-white border-b py-4 sticky top-16 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap gap-3">
+                <button class="filter-btn active bg-primary-600 text-white px-4 py-2 rounded-lg font-medium" data-filter="all">الكل</button>
+                <button class="filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="new-cairo">القاهرة الجديدة</button>
+                <button class="filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="new-capital">العاصمة الإدارية</button>
+                <button class="filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="sahel">الساحل الشمالي</button>
+                <button class="filter-btn bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium hover:bg-gray-200" data-filter="ain-sokhna">العين السخنة</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Grid -->
+    <section class="container mx-auto px-4 py-12">
+        <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Projects loaded via JS -->
+        </div>
+    </section>
+
+    <!-- Benefits -->
+    <section class="bg-white py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">لماذا تشتري في مشروع جديد؟</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="text-center p-6 bg-green-50 rounded-2xl">
+                    <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-percent text-2xl text-green-600"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">أسعار إطلاق</h3>
+                    <p class="text-gray-500 text-sm">أسعار أقل من السوق بنسبة تصل إلى 20%</p>
+                </div>
+                <div class="text-center p-6 bg-blue-50 rounded-2xl">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-calendar-check text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">تقسيط مريح</h3>
+                    <p class="text-gray-500 text-sm">أنظمة سداد تصل حتى 10 سنوات</p>
+                </div>
+                <div class="text-center p-6 bg-purple-50 rounded-2xl">
+                    <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-chart-line text-2xl text-purple-600"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">عائد استثماري</h3>
+                    <p class="text-gray-500 text-sm">ارتفاع قيمة العقار مع اكتمال المشروع</p>
+                </div>
+                <div class="text-center p-6 bg-yellow-50 rounded-2xl">
+                    <div class="w-14 h-14 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa-solid fa-wand-magic-sparkles text-2xl text-yellow-600"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 mb-2">تشطيبات حديثة</h3>
+                    <p class="text-gray-500 text-sm">أحدث التصميمات والتشطيبات العصرية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-gradient-to-l from-primary-900 to-primary-700 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold mb-4">هل تريد معرفة أحدث المشاريع أولاً؟</h2>
+            <p class="text-blue-200 mb-6">سجل بريدك الإلكتروني واحصل على تحديثات حصرية</p>
+            <form class="max-w-md mx-auto flex gap-3">
+                <input type="email" placeholder="بريدك الإلكتروني" class="flex-1 px-4 py-3 rounded-xl text-gray-800 outline-none" dir="ltr">
+                <button type="submit" class="bg-white text-primary-900 px-6 py-3 rounded-xl font-bold hover:bg-gray-100 transition">
+                    اشترك
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 border-t-4 border-primary-600">
+        <div class="container mx-auto px-4 text-center">
+            <p>جميع الحقوق محفوظة © 2025 بي تاج</p>
+        </div>
+    </footer>
+
+    <script>
+        const projects = [
+            {
+                id: 1,
+                name: "تاج سيتي",
+                developer: "مدينة نصر للإسكان",
+                area: "القاهرة الجديدة",
+                areaSlug: "new-cairo",
+                priceFrom: 2800000,
+                downPayment: "10%",
+                installment: "8 سنوات",
+                delivery: "2026",
+                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=800",
+                status: "تحت الإنشاء",
+                hot: true
+            },
+            {
+                id: 2,
+                name: "ذا لوفت",
+                developer: "أورا للتطوير",
+                area: "العاصمة الإدارية",
+                areaSlug: "new-capital",
+                priceFrom: 3200000,
+                downPayment: "5%",
+                installment: "10 سنوات",
+                delivery: "2027",
+                image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&q=80&w=800",
+                status: "إطلاق جديد",
+                hot: true
+            },
+            {
+                id: 3,
+                name: "سيلفر ساندز",
+                developer: "أورا",
+                area: "الساحل الشمالي",
+                areaSlug: "sahel",
+                priceFrom: 4500000,
+                downPayment: "10%",
+                installment: "7 سنوات",
+                delivery: "2025",
+                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=800",
+                status: "تسليم قريب",
+                hot: false
+            },
+            {
+                id: 4,
+                name: "بو ساندز",
+                developer: "سيتي إيدج",
+                area: "العين السخنة",
+                areaSlug: "ain-sokhna",
+                priceFrom: 1800000,
+                downPayment: "10%",
+                installment: "6 سنوات",
+                delivery: "2025",
+                image: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&q=80&w=800",
+                status: "متاح للتسليم",
+                hot: false
+            },
+            {
+                id: 5,
+                name: "سيرانو العاصمة",
+                developer: "نيو جينيريشن",
+                area: "العاصمة الإدارية",
+                areaSlug: "new-capital",
+                priceFrom: 2100000,
+                downPayment: "0%",
+                installment: "10 سنوات",
+                delivery: "2027",
+                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800",
+                status: "0% مقدم",
+                hot: true
+            },
+            {
+                id: 6,
+                name: "فيفث سكوير",
+                developer: "المراسم",
+                area: "القاهرة الجديدة",
+                areaSlug: "new-cairo",
+                priceFrom: 5500000,
+                downPayment: "15%",
+                installment: "7 سنوات",
+                delivery: "2026",
+                image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=800",
+                status: "مراحل جديدة",
+                hot: false
+            }
+        ];
+
+        function renderProjects(data) {
+            const grid = document.getElementById('projects-grid');
+            grid.innerHTML = data.map(project => `
+                <article class="project-card bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-100">
+                    <div class="relative h-52 overflow-hidden">
+                        <img src="${project.image}" alt="${project.name}" class="w-full h-full object-cover">
+                        <div class="absolute top-3 right-3 flex gap-2">
+                            <span class="bg-green-600 text-white px-3 py-1 rounded-full text-xs font-bold">${project.status}</span>
+                            ${project.hot ? '<span class="bg-red-500 text-white px-3 py-1 rounded-full text-xs font-bold"><i class="fa-solid fa-fire"></i></span>' : ''}
+                        </div>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="text-xl font-bold text-gray-900 mb-1">${project.name}</h3>
+                        <p class="text-gray-500 text-sm mb-3">${project.developer} • ${project.area}</p>
+
+                        <div class="grid grid-cols-3 gap-2 text-center mb-4">
+                            <div class="bg-gray-50 rounded-lg p-2">
+                                <p class="text-xs text-gray-500">مقدم</p>
+                                <p class="font-bold text-primary-600">${project.downPayment}</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-2">
+                                <p class="text-xs text-gray-500">تقسيط</p>
+                                <p class="font-bold text-primary-600">${project.installment}</p>
+                            </div>
+                            <div class="bg-gray-50 rounded-lg p-2">
+                                <p class="text-xs text-gray-500">تسليم</p>
+                                <p class="font-bold text-primary-600">${project.delivery}</p>
+                            </div>
+                        </div>
+
+                        <div class="flex justify-between items-center pt-4 border-t">
+                            <div>
+                                <p class="text-xs text-gray-500">يبدأ من</p>
+                                <p class="text-lg font-bold text-gray-900">${project.priceFrom.toLocaleString()} ج.م</p>
+                            </div>
+                            <a href="/pages/search.html?project=${project.id}" class="bg-primary-600 text-white px-5 py-2 rounded-lg font-bold hover:bg-primary-700 transition">
+                                التفاصيل
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // Initial render
+        renderProjects(projects);
+
+        // Filter
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active', 'bg-primary-600', 'text-white');
+                    b.classList.add('bg-gray-100', 'text-gray-700');
+                });
+                btn.classList.add('active', 'bg-primary-600', 'text-white');
+                btn.classList.remove('bg-gray-100', 'text-gray-700');
+
+                const filter = btn.dataset.filter;
+                if (filter === 'all') {
+                    renderProjects(projects);
+                } else {
+                    renderProjects(projects.filter(p => p.areaSlug === filter));
+                }
+            });
+        });
+    </script>
+</body>
+</html>

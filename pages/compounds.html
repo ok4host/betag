@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>دليل الكمبوندات في مصر | بي تاج - أسعار ومعلومات شاملة</title>
+    <meta name="description" content="دليل شامل لأفضل الكمبوندات في مصر. اكتشف الكمبوندات في التجمع الخامس، الشيخ زايد، العاصمة الإدارية مع الأسعار والمميزات.">
+    <meta name="keywords" content="كمبوندات مصر، كمبوندات التجمع الخامس، كمبوندات الشيخ زايد، كمبوندات العاصمة الإدارية">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { primary: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 900: '#1e3a8a' } } } }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { font-family: 'Cairo', sans-serif; }
+        .compound-card { transition: all 0.3s ease; }
+        .compound-card:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="bg-gray-50 text-right">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2">
+                <div class="bg-primary-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-house text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold text-primary-900">بي تاج</span>
+            </a>
+            <nav class="hidden md:flex gap-8 items-center text-gray-600 font-medium">
+                <a href="/" class="hover:text-primary-600 transition">الرئيسية</a>
+                <a href="/pages/search.html?type=sale" class="hover:text-primary-600 transition">شقق للبيع</a>
+                <a href="/pages/compounds.html" class="text-primary-600 font-bold">دليل الكمبوندات</a>
+            </nav>
+            <a href="/pages/add-property.html" class="hidden md:block bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition">أضف عقارك</a>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="bg-gradient-to-l from-primary-900 to-primary-700 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl">
+                <h1 class="text-3xl md:text-5xl font-bold mb-4">دليل الكمبوندات في مصر</h1>
+                <p class="text-blue-100 text-lg mb-8">اكتشف أفضل الكمبوندات السكنية مع معلومات شاملة عن الأسعار والمميزات والخدمات</p>
+
+                <!-- Search -->
+                <div class="bg-white rounded-xl p-4 flex flex-col md:flex-row gap-4">
+                    <div class="flex-1 relative">
+                        <i class="fa-solid fa-search absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" id="compound-search" placeholder="ابحث عن كمبوند..."
+                            class="w-full pr-12 pl-4 py-3 border-2 border-gray-200 rounded-lg focus:border-primary-500 outline-none text-gray-800">
+                    </div>
+                    <select id="area-filter" class="py-3 px-4 border-2 border-gray-200 rounded-lg focus:border-primary-500 outline-none bg-white text-gray-800">
+                        <option value="">كل المناطق</option>
+                        <option value="new-cairo">القاهرة الجديدة</option>
+                        <option value="sheikh-zayed">الشيخ زايد</option>
+                        <option value="6-october">6 أكتوبر</option>
+                        <option value="new-capital">العاصمة الإدارية</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="bg-white border-b">
+        <div class="container mx-auto px-4 py-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div>
+                    <p class="text-3xl font-bold text-primary-600">+200</p>
+                    <p class="text-gray-500">كمبوند</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold text-primary-600">+50</p>
+                    <p class="text-gray-500">مطور عقاري</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold text-primary-600">+15K</p>
+                    <p class="text-gray-500">وحدة سكنية</p>
+                </div>
+                <div>
+                    <p class="text-3xl font-bold text-primary-600">4</p>
+                    <p class="text-gray-500">مناطق رئيسية</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Compounds -->
+    <section class="container mx-auto px-4 py-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8">الكمبوندات الأكثر طلباً</h2>
+        <div id="compounds-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Compounds loaded via JS -->
+        </div>
+    </section>
+
+    <!-- Browse by Area -->
+    <section class="bg-white py-12">
+        <div class="container mx-auto px-4">
+            <h2 class="text-2xl font-bold text-gray-900 mb-8 text-center">تصفح حسب المنطقة</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <a href="/pages/compounds.html?area=new-cairo" class="bg-gradient-to-br from-blue-500 to-blue-700 text-white rounded-2xl p-6 text-center hover:shadow-lg transition">
+                    <i class="fa-solid fa-city text-3xl mb-3"></i>
+                    <h3 class="font-bold text-lg">القاهرة الجديدة</h3>
+                    <p class="text-blue-100 text-sm">85 كمبوند</p>
+                </a>
+                <a href="/pages/compounds.html?area=sheikh-zayed" class="bg-gradient-to-br from-green-500 to-green-700 text-white rounded-2xl p-6 text-center hover:shadow-lg transition">
+                    <i class="fa-solid fa-tree-city text-3xl mb-3"></i>
+                    <h3 class="font-bold text-lg">الشيخ زايد</h3>
+                    <p class="text-green-100 text-sm">45 كمبوند</p>
+                </a>
+                <a href="/pages/compounds.html?area=6-october" class="bg-gradient-to-br from-purple-500 to-purple-700 text-white rounded-2xl p-6 text-center hover:shadow-lg transition">
+                    <i class="fa-solid fa-building text-3xl mb-3"></i>
+                    <h3 class="font-bold text-lg">6 أكتوبر</h3>
+                    <p class="text-purple-100 text-sm">52 كمبوند</p>
+                </a>
+                <a href="/pages/compounds.html?area=new-capital" class="bg-gradient-to-br from-yellow-500 to-yellow-700 text-white rounded-2xl p-6 text-center hover:shadow-lg transition">
+                    <i class="fa-solid fa-landmark text-3xl mb-3"></i>
+                    <h3 class="font-bold text-lg">العاصمة الإدارية</h3>
+                    <p class="text-yellow-100 text-sm">38 كمبوند</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Developers -->
+    <section class="container mx-auto px-4 py-12">
+        <h2 class="text-2xl font-bold text-gray-900 mb-8">أفضل المطورين العقاريين</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+            <a href="#" class="bg-white rounded-xl p-4 text-center border-2 border-gray-100 hover:border-primary-300 transition">
+                <div class="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-3 flex items-center justify-center">
+                    <span class="text-xl font-bold text-gray-600">PH</span>
+                </div>
+                <p class="font-medium text-gray-800 text-sm">بالم هيلز</p>
+            </a>
+            <a href="#" class="bg-white rounded-xl p-4 text-center border-2 border-gray-100 hover:border-primary-300 transition">
+                <div class="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-3 flex items-center justify-center">
+                    <span class="text-xl font-bold text-gray-600">MV</span>
+                </div>
+                <p class="font-medium text-gray-800 text-sm">ماونتن فيو</p>
+            </a>
+            <a href="#" class="bg-white rounded-xl p-4 text-center border-2 border-gray-100 hover:border-primary-300 transition">
+                <div class="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-3 flex items-center justify-center">
+                    <span class="text-xl font-bold text-gray-600">SD</span>
+                </div>
+                <p class="font-medium text-gray-800 text-sm">سوديك</p>
+            </a>
+            <a href="#" class="bg-white rounded-xl p-4 text-center border-2 border-gray-100 hover:border-primary-300 transition">
+                <div class="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-3 flex items-center justify-center">
+                    <span class="text-xl font-bold text-gray-600">EM</span>
+                </div>
+                <p class="font-medium text-gray-800 text-sm">إعمار</p>
+            </a>
+            <a href="#" class="bg-white rounded-xl p-4 text-center border-2 border-gray-100 hover:border-primary-300 transition">
+                <div class="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-3 flex items-center justify-center">
+                    <span class="text-xl font-bold text-gray-600">OD</span>
+                </div>
+                <p class="font-medium text-gray-800 text-sm">أوراسكوم</p>
+            </a>
+            <a href="#" class="bg-white rounded-xl p-4 text-center border-2 border-gray-100 hover:border-primary-300 transition">
+                <div class="w-16 h-16 bg-gray-100 rounded-full mx-auto mb-3 flex items-center justify-center">
+                    <span class="text-xl font-bold text-gray-600">HH</span>
+                </div>
+                <p class="font-medium text-gray-800 text-sm">حسن علام</p>
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="bg-primary-900 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-2xl font-bold mb-4">لم تجد الكمبوند المناسب؟</h2>
+            <p class="text-blue-200 mb-6">سجل طلبك وسنساعدك في إيجاد الكمبوند المثالي لك</p>
+            <a href="/#lead-form" class="inline-block bg-white text-primary-900 px-8 py-3 rounded-xl font-bold hover:bg-gray-100 transition">
+                سجل طلبك الآن
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 border-t-4 border-primary-600">
+        <div class="container mx-auto px-4 text-center">
+            <p>جميع الحقوق محفوظة © 2025 بي تاج</p>
+        </div>
+    </footer>
+
+    <script>
+        const compounds = [
+            {
+                id: 1,
+                name: "ماونتن فيو آي سيتي",
+                nameEn: "Mountain View iCity",
+                area: "القاهرة الجديدة",
+                areaSlug: "new-cairo",
+                developer: "ماونتن فيو",
+                priceFrom: 3500000,
+                image: "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&q=80&w=800",
+                units: ["شقق", "فلل", "تاون هاوس"],
+                amenities: ["نادي رياضي", "حمامات سباحة", "مناطق تجارية", "أمن 24 ساعة"],
+                featured: true
+            },
+            {
+                id: 2,
+                name: "بالم هيلز القطامية",
+                nameEn: "Palm Hills Katameya",
+                area: "القاهرة الجديدة",
+                areaSlug: "new-cairo",
+                developer: "بالم هيلز",
+                priceFrom: 5000000,
+                image: "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&q=80&w=800",
+                units: ["فلل", "قصور"],
+                amenities: ["جولف", "نادي اجتماعي", "مدارس دولية"],
+                featured: true
+            },
+            {
+                id: 3,
+                name: "سوديك إيست",
+                nameEn: "SODIC East",
+                area: "القاهرة الجديدة",
+                areaSlug: "new-cairo",
+                developer: "سوديك",
+                priceFrom: 4200000,
+                image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&q=80&w=800",
+                units: ["شقق", "دوبلكس", "تاون هاوس"],
+                amenities: ["كلوب هاوس", "ممشى", "مناطق خضراء"],
+                featured: true
+            },
+            {
+                id: 4,
+                name: "زيد الشيخ زايد",
+                nameEn: "Zed Sheikh Zayed",
+                area: "الشيخ زايد",
+                areaSlug: "sheikh-zayed",
+                developer: "أورا",
+                priceFrom: 6000000,
+                image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&q=80&w=800",
+                units: ["شقق", "فلل"],
+                amenities: ["بحيرات صناعية", "نادي صحي", "مطاعم"],
+                featured: false
+            },
+            {
+                id: 5,
+                name: "ميدتاون سولو",
+                nameEn: "Midtown Solo",
+                area: "العاصمة الإدارية",
+                areaSlug: "new-capital",
+                developer: "بيتر هوم",
+                priceFrom: 2800000,
+                image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800",
+                units: ["شقق", "ستوديو"],
+                amenities: ["مول تجاري", "جيم", "روف جاردن"],
+                featured: false
+            },
+            {
+                id: 6,
+                name: "هايد بارك",
+                nameEn: "Hyde Park",
+                area: "القاهرة الجديدة",
+                areaSlug: "new-cairo",
+                developer: "هايد بارك",
+                priceFrom: 4500000,
+                image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=800",
+                units: ["شقق", "فلل", "تاون هاوس"],
+                amenities: ["حديقة مركزية", "مدارس", "مستشفيات"],
+                featured: true
+            }
+        ];
+
+        function renderCompounds(data) {
+            const grid = document.getElementById('compounds-grid');
+            grid.innerHTML = data.map(compound => `
+                <article class="compound-card bg-white rounded-2xl shadow-md overflow-hidden border border-gray-100">
+                    <div class="relative h-48 overflow-hidden">
+                        <img src="${compound.image}" alt="${compound.name}" class="w-full h-full object-cover">
+                        ${compound.featured ? '<span class="absolute top-3 right-3 bg-yellow-500 text-white px-3 py-1 rounded-full text-xs font-bold"><i class="fa-solid fa-star"></i> مميز</span>' : ''}
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-4">
+                            <p class="text-white font-bold text-lg">${compound.name}</p>
+                            <p class="text-gray-200 text-sm">${compound.developer}</p>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <div class="flex items-center gap-2 text-gray-500 text-sm mb-3">
+                            <i class="fa-solid fa-location-dot text-primary-500"></i>
+                            ${compound.area}
+                        </div>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            ${compound.units.map(u => `<span class="bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">${u}</span>`).join('')}
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-xs text-gray-500">يبدأ من</p>
+                                <p class="font-bold text-primary-600">${compound.priceFrom.toLocaleString()} ج.م</p>
+                            </div>
+                            <a href="/pages/search.html?compound=${compound.id}" class="bg-primary-600 text-white px-4 py-2 rounded-lg text-sm font-bold hover:bg-primary-700 transition">
+                                عرض الوحدات
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            `).join('');
+        }
+
+        // Initial render
+        renderCompounds(compounds);
+
+        // Search & Filter
+        const searchInput = document.getElementById('compound-search');
+        const areaFilter = document.getElementById('area-filter');
+
+        function filterCompounds() {
+            const query = searchInput.value.toLowerCase();
+            const area = areaFilter.value;
+
+            const filtered = compounds.filter(c => {
+                const matchesSearch = c.name.toLowerCase().includes(query) || c.nameEn.toLowerCase().includes(query) || c.developer.toLowerCase().includes(query);
+                const matchesArea = !area || c.areaSlug === area;
+                return matchesSearch && matchesArea;
+            });
+
+            renderCompounds(filtered);
+        }
+
+        searchInput.addEventListener('input', filterCompounds);
+        areaFilter.addEventListener('change', filterCompounds);
+
+        // Check URL params
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('area')) {
+            areaFilter.value = params.get('area');
+            filterCompounds();
+        }
+    </script>
+</body>
+</html>

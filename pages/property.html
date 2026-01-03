@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO Tags (Dynamic via JS) -->
+    <title>تفاصيل العقار | بي تاج</title>
+    <meta name="description" content="اكتشف تفاصيل هذا العقار المميز على بي تاج">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="بي تاج">
+    <meta property="og:locale" content="ar_EG">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'GA_MEASUREMENT_ID');
+    </script>
+
+    <style>
+        * { font-family: 'Cairo', sans-serif; }
+
+        .gallery-thumb {
+            transition: all 0.3s ease;
+        }
+        .gallery-thumb.active {
+            border-color: #2563eb;
+            opacity: 1;
+        }
+        .gallery-thumb:not(.active) {
+            opacity: 0.6;
+        }
+        .gallery-thumb:hover {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-right">
+
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="/" class="flex items-center gap-2">
+                <div class="bg-primary-600 p-2 rounded-lg text-white">
+                    <i class="fa-solid fa-house text-xl"></i>
+                </div>
+                <span class="text-2xl font-bold text-primary-900">بي تاج</span>
+            </a>
+
+            <nav class="hidden md:flex gap-8 items-center text-gray-600 font-medium">
+                <a href="/" class="hover:text-primary-600 transition">الرئيسية</a>
+                <a href="/pages/search.html?type=sale" class="hover:text-primary-600 transition">شقق للبيع</a>
+                <a href="/pages/search.html?type=rent" class="hover:text-primary-600 transition">شقق للإيجار</a>
+            </nav>
+
+            <div class="hidden md:flex items-center gap-4">
+                <a href="/pages/add-property.html" class="bg-primary-600 text-white px-5 py-2 rounded-lg hover:bg-primary-700 transition shadow-md">
+                    أضف عقارك مجاناً
+                </a>
+            </div>
+
+            <button id="mobile-menu-btn" class="md:hidden text-gray-700 text-2xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex items-center gap-2 text-sm text-gray-500" id="breadcrumb">
+                <a href="/" class="hover:text-primary-600">الرئيسية</a>
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+                <a href="/pages/search.html" class="hover:text-primary-600">عقارات</a>
+                <i class="fa-solid fa-chevron-left text-xs"></i>
+                <span class="text-gray-800" id="breadcrumb-title">تفاصيل العقار</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8" id="property-content">
+        <!-- Loading State -->
+        <div id="loading-state" class="text-center py-20">
+            <i class="fa-solid fa-spinner fa-spin text-4xl text-primary-600 mb-4"></i>
+            <p class="text-gray-500">جاري تحميل تفاصيل العقار...</p>
+        </div>
+
+        <!-- Property Content (Hidden initially) -->
+        <div id="property-details" class="hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column - Details -->
+                <div class="lg:col-span-2 space-y-6">
+                    <!-- Gallery -->
+                    <div class="bg-white rounded-2xl overflow-hidden shadow-md">
+                        <div class="relative h-[400px] md:h-[500px]" id="main-image-container">
+                            <img id="main-image" src="" alt="" class="w-full h-full object-cover">
+                            <!-- Badges -->
+                            <div class="absolute top-4 right-4 flex gap-2" id="badges"></div>
+                            <!-- Navigation -->
+                            <button onclick="prevImage()" class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center">
+                                <i class="fa-solid fa-chevron-left"></i>
+                            </button>
+                            <button onclick="nextImage()" class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/90 hover:bg-white rounded-full shadow-lg flex items-center justify-center">
+                                <i class="fa-solid fa-chevron-right"></i>
+                            </button>
+                        </div>
+                        <!-- Thumbnails -->
+                        <div class="flex gap-2 p-4 overflow-x-auto" id="thumbnails"></div>
+                    </div>
+
+                    <!-- Title & Location -->
+                    <div class="bg-white rounded-2xl p-6 shadow-md">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h1 id="property-title" class="text-2xl md:text-3xl font-bold text-gray-900 mb-2"></h1>
+                                <p id="property-location" class="text-gray-500 flex items-center gap-2">
+                                    <i class="fa-solid fa-location-dot text-primary-500"></i>
+                                    <span></span>
+                                </p>
+                            </div>
+                            <button onclick="shareProperty()" class="w-10 h-10 border-2 border-gray-200 rounded-full flex items-center justify-center text-gray-500 hover:border-primary-500 hover:text-primary-600 transition">
+                                <i class="fa-solid fa-share-nodes"></i>
+                            </button>
+                        </div>
+
+                        <!-- Specs Grid -->
+                        <div class="grid grid-cols-4 gap-4 py-4 border-t border-b border-gray-100">
+                            <div class="text-center">
+                                <i class="fa-solid fa-bed text-primary-500 text-xl mb-1"></i>
+                                <p class="font-bold text-gray-900" id="spec-beds">-</p>
+                                <p class="text-xs text-gray-500">غرف نوم</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fa-solid fa-bath text-primary-500 text-xl mb-1"></i>
+                                <p class="font-bold text-gray-900" id="spec-baths">-</p>
+                                <p class="text-xs text-gray-500">حمامات</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fa-solid fa-maximize text-primary-500 text-xl mb-1"></i>
+                                <p class="font-bold text-gray-900" id="spec-area">-</p>
+                                <p class="text-xs text-gray-500">م²</p>
+                            </div>
+                            <div class="text-center">
+                                <i class="fa-solid fa-calendar text-primary-500 text-xl mb-1"></i>
+                                <p class="font-bold text-gray-900" id="spec-date">-</p>
+                                <p class="text-xs text-gray-500">تاريخ النشر</p>
+                            </div>
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mt-4">
+                            <p class="text-sm text-gray-500 mb-1">السعر</p>
+                            <p class="text-3xl font-bold text-primary-900" id="property-price"></p>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div class="bg-white rounded-2xl p-6 shadow-md">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">
+                            <i class="fa-solid fa-align-right ml-2 text-primary-500"></i>
+                            وصف العقار
+                        </h2>
+                        <p id="property-description" class="text-gray-600 leading-relaxed"></p>
+                    </div>
+
+                    <!-- Amenities -->
+                    <div class="bg-white rounded-2xl p-6 shadow-md">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">
+                            <i class="fa-solid fa-check-circle ml-2 text-primary-500"></i>
+                            المميزات
+                        </h2>
+                        <div id="amenities-grid" class="grid grid-cols-2 md:grid-cols-3 gap-4"></div>
+                    </div>
+
+                    <!-- Map Placeholder -->
+                    <div class="bg-white rounded-2xl p-6 shadow-md">
+                        <h2 class="text-xl font-bold text-gray-900 mb-4">
+                            <i class="fa-solid fa-map-location-dot ml-2 text-primary-500"></i>
+                            الموقع
+                        </h2>
+                        <div class="h-64 bg-gray-100 rounded-xl flex items-center justify-center">
+                            <p class="text-gray-500">خريطة الموقع (سيتم إضافتها)</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Sidebar -->
+                <div class="space-y-6">
+                    <!-- Contact Card (Sticky) -->
+                    <div class="bg-white rounded-2xl p-6 shadow-md sticky top-24">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">تواصل مع المعلن</h3>
+
+                        <div class="flex items-center gap-4 mb-6">
+                            <div class="w-14 h-14 bg-primary-100 rounded-full flex items-center justify-center">
+                                <i class="fa-solid fa-user text-2xl text-primary-600"></i>
+                            </div>
+                            <div>
+                                <p id="agent-name" class="font-bold text-gray-900"></p>
+                                <p class="text-sm text-gray-500">وسيط عقاري</p>
+                            </div>
+                        </div>
+
+                        <div class="space-y-3">
+                            <a id="whatsapp-btn" href="#" target="_blank"
+                               class="flex items-center justify-center gap-2 bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl font-bold transition w-full">
+                                <i class="fa-brands fa-whatsapp text-xl"></i>
+                                تواصل واتساب
+                            </a>
+
+                            <button id="call-btn" onclick="showAgentPhone()"
+                                    class="flex items-center justify-center gap-2 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 py-3 rounded-xl font-bold transition w-full">
+                                <i class="fa-solid fa-phone text-lg"></i>
+                                <span>إظهار رقم الهاتف</span>
+                            </button>
+                        </div>
+
+                        <hr class="my-6">
+
+                        <!-- Quick Inquiry Form -->
+                        <form id="inquiry-form" class="space-y-4">
+                            <h4 class="font-bold text-gray-800">أو أرسل استفسارك</h4>
+                            <input type="text" name="name" placeholder="الاسم" required
+                                   class="w-full border-2 border-gray-200 p-3 rounded-xl focus:border-primary-500 outline-none transition">
+                            <input type="tel" name="phone" placeholder="رقم الهاتف" required
+                                   class="w-full border-2 border-gray-200 p-3 rounded-xl focus:border-primary-500 outline-none transition">
+                            <textarea name="message" placeholder="رسالتك" rows="3"
+                                      class="w-full border-2 border-gray-200 p-3 rounded-xl focus:border-primary-500 outline-none transition resize-none"></textarea>
+                            <button type="submit"
+                                    class="w-full bg-primary-600 hover:bg-primary-700 text-white py-3 rounded-xl font-bold transition">
+                                إرسال الاستفسار
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Share Buttons -->
+                    <div class="bg-white rounded-2xl p-6 shadow-md">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4">مشاركة العقار</h3>
+                        <div class="flex gap-3">
+                            <button onclick="shareToFacebook()" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition">
+                                <i class="fa-brands fa-facebook-f"></i>
+                            </button>
+                            <button onclick="shareToTwitter()" class="flex-1 bg-sky-500 hover:bg-sky-600 text-white py-2 rounded-lg transition">
+                                <i class="fa-brands fa-twitter"></i>
+                            </button>
+                            <button onclick="shareToWhatsApp()" class="flex-1 bg-green-500 hover:bg-green-600 text-white py-2 rounded-lg transition">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </button>
+                            <button onclick="copyLink()" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white py-2 rounded-lg transition">
+                                <i class="fa-solid fa-link"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Similar Properties -->
+            <section class="mt-12">
+                <h2 class="text-2xl font-bold text-gray-900 mb-6">عقارات مشابهة</h2>
+                <div id="similar-properties" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+            </section>
+        </div>
+
+        <!-- Not Found State -->
+        <div id="not-found" class="hidden text-center py-20">
+            <i class="fa-solid fa-house-circle-exclamation text-6xl text-gray-300 mb-4"></i>
+            <h2 class="text-2xl font-bold text-gray-800 mb-2">العقار غير موجود</h2>
+            <p class="text-gray-500 mb-6">لم نتمكن من العثور على هذا العقار</p>
+            <a href="/" class="inline-block bg-primary-600 text-white px-6 py-3 rounded-xl font-bold hover:bg-primary-700 transition">
+                العودة للرئيسية
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-gray-300 py-8 border-t-4 border-primary-600">
+        <div class="container mx-auto px-4 text-center">
+            <p>جميع الحقوق محفوظة © 2025 بي تاج</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+    <script>
+        let currentProperty = null;
+        let currentImageIndex = 0;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProperty();
+            initInquiryForm();
+        });
+
+        function loadProperty() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const propertyId = parseInt(urlParams.get('id'));
+
+            if (!propertyId) {
+                showNotFoundState();
+                return;
+            }
+
+            // Find property from data
+            const property = window.BeTaj?.properties?.find(p => p.id === propertyId);
+
+            if (!property) {
+                showNotFoundState();
+                return;
+            }
+
+            currentProperty = property;
+            renderProperty(property);
+
+            // Track view
+            if (typeof gtag !== 'undefined') {
+                gtag('event', 'view_item', {
+                    item_id: property.id,
+                    item_name: property.title,
+                    price: property.price
+                });
+            }
+        }
+
+        function renderProperty(prop) {
+            // Hide loading, show content
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('property-details').classList.remove('hidden');
+
+            // Update page title
+            document.title = `${prop.title} | بي تاج`;
+
+            // Update breadcrumb
+            document.getElementById('breadcrumb-title').textContent = prop.title;
+
+            // Main image
+            document.getElementById('main-image').src = prop.images[0];
+            document.getElementById('main-image').alt = prop.title;
+
+            // Thumbnails
+            const thumbsContainer = document.getElementById('thumbnails');
+            thumbsContainer.innerHTML = prop.images.map((img, idx) => `
+                <img src="${img}" alt="صورة ${idx + 1}"
+                     class="w-20 h-16 object-cover rounded-lg cursor-pointer border-2 gallery-thumb ${idx === 0 ? 'active border-primary-500' : 'border-transparent'}"
+                     onclick="setMainImage(${idx})">
+            `).join('');
+
+            // Badges
+            const badges = document.getElementById('badges');
+            let badgesHTML = `<span class="px-3 py-1 rounded-full text-xs font-bold text-white ${prop.type === 'sale' ? 'bg-green-600' : 'bg-purple-600'}">${prop.typeLabel}</span>`;
+            if (prop.featured) badgesHTML += `<span class="bg-yellow-500 px-3 py-1 rounded-full text-xs font-bold text-white"><i class="fa-solid fa-star"></i> مميز</span>`;
+            if (prop.verified) badgesHTML += `<span class="bg-blue-600 px-3 py-1 rounded-full text-xs font-bold text-white"><i class="fa-solid fa-check"></i> موثق</span>`;
+            badges.innerHTML = badgesHTML;
+
+            // Title & Location
+            document.getElementById('property-title').textContent = prop.title;
+            document.getElementById('property-location').querySelector('span').textContent = prop.location;
+
+            // Specs
+            document.getElementById('spec-beds').textContent = prop.beds > 0 ? prop.beds : '-';
+            document.getElementById('spec-baths').textContent = prop.baths > 0 ? prop.baths : '-';
+            document.getElementById('spec-area').textContent = prop.area;
+            document.getElementById('spec-date').textContent = new Date(prop.createdAt).toLocaleDateString('ar-EG');
+
+            // Price
+            document.getElementById('property-price').innerHTML = `${prop.priceFormatted} <span class="text-lg font-normal text-gray-500">${prop.currency}</span>`;
+
+            // Description
+            document.getElementById('property-description').textContent = prop.description;
+
+            // Amenities
+            const amenitiesGrid = document.getElementById('amenities-grid');
+            amenitiesGrid.innerHTML = prop.amenities.map(amenity => `
+                <div class="flex items-center gap-2 text-gray-700">
+                    <i class="fa-solid fa-check text-green-500"></i>
+                    <span>${amenity}</span>
+                </div>
+            `).join('');
+
+            // Agent
+            document.getElementById('agent-name').textContent = prop.agent.name;
+            document.getElementById('whatsapp-btn').href = `https://wa.me/${prop.agent.whatsapp}?text=${encodeURIComponent('مرحباً، أنا مهتم بـ: ' + prop.title + '\n' + window.location.href)}`;
+
+            // Similar properties
+            renderSimilarProperties(prop);
+        }
+
+        function setMainImage(index) {
+            if (!currentProperty) return;
+            currentImageIndex = index;
+            document.getElementById('main-image').src = currentProperty.images[index];
+
+            // Update thumbnails
+            document.querySelectorAll('.gallery-thumb').forEach((thumb, idx) => {
+                if (idx === index) {
+                    thumb.classList.add('active', 'border-primary-500');
+                    thumb.classList.remove('border-transparent');
+                } else {
+                    thumb.classList.remove('active', 'border-primary-500');
+                    thumb.classList.add('border-transparent');
+                }
+            });
+        }
+
+        function nextImage() {
+            if (!currentProperty) return;
+            const nextIndex = (currentImageIndex + 1) % currentProperty.images.length;
+            setMainImage(nextIndex);
+        }
+
+        function prevImage() {
+            if (!currentProperty) return;
+            const prevIndex = (currentImageIndex - 1 + currentProperty.images.length) % currentProperty.images.length;
+            setMainImage(prevIndex);
+        }
+
+        function showAgentPhone() {
+            if (!currentProperty) return;
+            const phone = currentProperty.agent.phone;
+            const btn = document.getElementById('call-btn');
+            btn.innerHTML = `<i class="fa-solid fa-phone"></i> <a href="tel:${phone}" dir="ltr">${phone}</a>`;
+            btn.onclick = null;
+
+            // Track event
+            window.BeTaj?.trackEvent('show_phone', { property_id: currentProperty.id });
+        }
+
+        function renderSimilarProperties(currentProp) {
+            const container = document.getElementById('similar-properties');
+            const similar = window.BeTaj?.properties?.filter(p =>
+                p.id !== currentProp.id &&
+                (p.locationSlug === currentProp.locationSlug || p.type === currentProp.type)
+            ).slice(0, 3);
+
+            if (!similar || similar.length === 0) {
+                container.innerHTML = '<p class="text-gray-500 col-span-3 text-center">لا توجد عقارات مشابهة حالياً</p>';
+                return;
+            }
+
+            container.innerHTML = similar.map(prop => `
+                <a href="/pages/property.html?id=${prop.id}" class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                    <img src="${prop.image}" alt="${prop.title}" class="w-full h-48 object-cover">
+                    <div class="p-4">
+                        <h3 class="font-bold text-gray-800 mb-1 line-clamp-1">${prop.title}</h3>
+                        <p class="text-sm text-gray-500 mb-2">${prop.location}</p>
+                        <p class="font-bold text-primary-600">${prop.priceFormatted} ${prop.currency}</p>
+                    </div>
+                </a>
+            `).join('');
+        }
+
+        function showNotFoundState() {
+            document.getElementById('loading-state').classList.add('hidden');
+            document.getElementById('not-found').classList.remove('hidden');
+        }
+
+        function initInquiryForm() {
+            const form = document.getElementById('inquiry-form');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const formData = new FormData(form);
+                const data = Object.fromEntries(formData);
+                data.property_id = currentProperty?.id;
+
+                // Simulate API call
+                await new Promise(r => setTimeout(r, 1000));
+
+                window.BeTaj?.showNotification('تم إرسال استفسارك بنجاح!', 'success');
+                window.BeTaj?.trackEvent('inquiry_submit', data);
+                form.reset();
+            });
+        }
+
+        // Share functions
+        function shareToFacebook() {
+            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
+        }
+
+        function shareToTwitter() {
+            window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(currentProperty?.title || '')}`, '_blank');
+        }
+
+        function shareToWhatsApp() {
+            window.open(`https://wa.me/?text=${encodeURIComponent(currentProperty?.title + '\n' + window.location.href)}`, '_blank');
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href);
+            window.BeTaj?.showNotification('تم نسخ الرابط', 'success');
+        }
+
+        function shareProperty() {
+            if (navigator.share) {
+                navigator.share({
+                    title: currentProperty?.title,
+                    url: window.location.href
+                });
+            } else {
+                copyLink();
+            }
+        }
+    </script>
+</body>
+</html>

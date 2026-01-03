@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إنشاء حساب جديد | بي تاج</title>
+    <meta name="description" content="أنشئ حسابك المجاني على بي تاج وابدأ في نشر عقاراتك والوصول لآلاف العملاء">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: { 50: '#eff6ff', 100: '#dbeafe', 500: '#3b82f6', 600: '#2563eb', 700: '#1d4ed8', 900: '#1e3a8a' }
+                    }
+                }
+            }
+        }
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>* { font-family: 'Cairo', sans-serif; }</style>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+    <div class="w-full max-w-md">
+        <!-- Logo -->
+        <div class="text-center mb-8">
+            <a href="/" class="inline-flex items-center gap-2">
+                <div class="bg-primary-600 p-3 rounded-xl text-white">
+                    <i class="fa-solid fa-house text-2xl"></i>
+                </div>
+                <span class="text-3xl font-bold text-primary-900">بي تاج</span>
+            </a>
+        </div>
+
+        <!-- Register Card -->
+        <div class="bg-white rounded-2xl shadow-xl p-8">
+            <h1 class="text-2xl font-bold text-gray-900 text-center mb-2">إنشاء حساب جديد</h1>
+            <p class="text-gray-500 text-center mb-8">انضم إلينا مجاناً</p>
+
+            <form id="register-form" class="space-y-5">
+                <!-- Account Type -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-3">نوع الحساب</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="relative">
+                            <input type="radio" name="account_type" value="individual" class="peer sr-only" checked>
+                            <div class="border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition">
+                                <i class="fa-solid fa-user text-xl text-gray-400 mb-1"></i>
+                                <p class="font-medium text-sm">فرد</p>
+                            </div>
+                        </label>
+                        <label class="relative">
+                            <input type="radio" name="account_type" value="broker" class="peer sr-only">
+                            <div class="border-2 border-gray-200 rounded-xl p-3 text-center cursor-pointer peer-checked:border-primary-600 peer-checked:bg-primary-50 transition">
+                                <i class="fa-solid fa-building text-xl text-gray-400 mb-1"></i>
+                                <p class="font-medium text-sm">وسيط/شركة</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Name -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">الاسم الكامل</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-user absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="text" name="name" required placeholder="أدخل اسمك"
+                            class="w-full pr-12 pl-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 outline-none transition">
+                    </div>
+                </div>
+
+                <!-- Phone -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">رقم الهاتف</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-phone absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="tel" name="phone" required placeholder="01xxxxxxxxx" pattern="01[0-9]{9}"
+                            class="w-full pr-12 pl-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 outline-none transition" dir="ltr">
+                    </div>
+                </div>
+
+                <!-- Email -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">البريد الإلكتروني (اختياري)</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-envelope absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="email" name="email" placeholder="email@example.com"
+                            class="w-full pr-12 pl-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 outline-none transition" dir="ltr">
+                    </div>
+                </div>
+
+                <!-- Password -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">كلمة المرور</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="password" name="password" id="password" required placeholder="6 أحرف على الأقل" minlength="6"
+                            class="w-full pr-12 pl-12 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 outline-none transition">
+                        <button type="button" onclick="togglePassword('password')" class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                            <i class="fa-solid fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Confirm Password -->
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">تأكيد كلمة المرور</label>
+                    <div class="relative">
+                        <i class="fa-solid fa-lock absolute right-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+                        <input type="password" name="password_confirm" id="password_confirm" required placeholder="أعد كتابة كلمة المرور"
+                            class="w-full pr-12 pl-4 py-3 border-2 border-gray-200 rounded-xl focus:border-primary-500 outline-none transition">
+                    </div>
+                </div>
+
+                <!-- Terms -->
+                <div>
+                    <label class="flex items-start gap-3 cursor-pointer">
+                        <input type="checkbox" name="terms" required class="w-5 h-5 text-primary-600 mt-0.5">
+                        <span class="text-sm text-gray-600">
+                            أوافق على <a href="/pages/terms.html" class="text-primary-600 hover:underline">شروط الاستخدام</a>
+                            و<a href="/pages/privacy.html" class="text-primary-600 hover:underline">سياسة الخصوصية</a>
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Submit -->
+                <button type="submit" class="w-full bg-primary-600 text-white py-3 rounded-xl font-bold hover:bg-primary-700 transition text-lg">
+                    إنشاء الحساب
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="flex items-center gap-4 my-6">
+                <div class="flex-1 h-px bg-gray-200"></div>
+                <span class="text-gray-400 text-sm">أو</span>
+                <div class="flex-1 h-px bg-gray-200"></div>
+            </div>
+
+            <!-- Social Login -->
+            <div class="space-y-3">
+                <button class="w-full flex items-center justify-center gap-3 border-2 border-gray-200 py-3 rounded-xl font-medium hover:bg-gray-50 transition">
+                    <img src="https://www.google.com/favicon.ico" alt="Google" class="w-5 h-5">
+                    التسجيل مع Google
+                </button>
+            </div>
+
+            <!-- Login Link -->
+            <p class="text-center mt-8 text-gray-600">
+                لديك حساب بالفعل؟
+                <a href="/pages/login.html" class="text-primary-600 font-bold hover:underline">تسجيل الدخول</a>
+            </p>
+        </div>
+
+        <!-- Back to Home -->
+        <p class="text-center mt-6">
+            <a href="/" class="text-gray-500 hover:text-primary-600 flex items-center justify-center gap-2">
+                <i class="fa-solid fa-arrow-right"></i>
+                العودة للرئيسية
+            </a>
+        </p>
+    </div>
+
+    <script>
+        function togglePassword(id) {
+            const input = document.getElementById(id);
+            const icon = input.parentElement.querySelector('i.fa-eye, i.fa-eye-slash');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        document.getElementById('register-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('password_confirm').value;
+
+            if (password !== confirm) {
+                alert('كلمة المرور غير متطابقة');
+                return;
+            }
+
+            const btn = this.querySelector('button[type="submit"]');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i>';
+            btn.disabled = true;
+
+            try {
+                await new Promise(r => setTimeout(r, 1500));
+                alert('تم إنشاء حسابك بنجاح! سيتم إرسال رمز تأكيد لرقم هاتفك.');
+                window.location.href = '/pages/login.html';
+            } catch (error) {
+                alert('حدث خطأ، يرجى المحاولة مرة أخرى');
+            } finally {
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
