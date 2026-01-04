@@ -3,6 +3,7 @@
  * Site Header Template
  */
 require_once __DIR__ . '/functions.php';
+require_once __DIR__ . '/seo-schemas.php';
 
 $settings = getSettings();
 $siteUrl = SITE_URL;
@@ -17,6 +18,7 @@ $pageDescription = $pageDescription ?? $seo['meta_description'] ?? 'أكبر م�
 $pageKeywords = $pageKeywords ?? $seo['meta_keywords'] ?? 'عقارات مصر، شقق للبيع، فلل، إيجار';
 $ogImage = $ogImage ?? $seo['og_image'] ?? $siteUrl . '/images/og-image.jpg';
 $canonicalUrl = $canonicalUrl ?? $siteUrl . $_SERVER['REQUEST_URI'];
+$robots = $robots ?? 'index, follow';
 
 // Start session for favorites
 startSession();
@@ -49,6 +51,18 @@ startSession();
     <meta name="twitter:title" content="<?= htmlspecialchars($pageTitle) ?>">
     <meta name="twitter:description" content="<?= htmlspecialchars($pageDescription) ?>">
     <meta name="twitter:image" content="<?= htmlspecialchars($ogImage) ?>">
+
+    <!-- Schema.org JSON-LD -->
+    <?= SeoSchemas::render(SeoSchemas::organization()) ?>
+    <?= SeoSchemas::render(SeoSchemas::website()) ?>
+    <?php if ($currentPage === 'index'): ?>
+    <?= SeoSchemas::render(SeoSchemas::localBusiness()) ?>
+    <?php endif; ?>
+    <?php if (isset($pageSchemas) && is_array($pageSchemas)): ?>
+    <?php foreach ($pageSchemas as $schema): ?>
+    <?= SeoSchemas::render($schema) ?>
+    <?php endforeach; ?>
+    <?php endif; ?>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/images/favicon.ico">

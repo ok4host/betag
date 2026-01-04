@@ -94,11 +94,89 @@ echo '<?xml version="1.0" encoding="UTF-8"?>';
         <priority>0.8</priority>
         <?php if ($prop['featured_image']): ?>
         <image:image>
-            <image:loc><?= htmlspecialchars($prop['featured_image']) ?></image:loc>
+            <image:loc><?= $siteUrl ?>/uploads/properties/<?= htmlspecialchars($prop['featured_image']) ?></image:loc>
             <image:title><?= htmlspecialchars($prop['title']) ?></image:title>
         </image:image>
         <?php endif; ?>
     </url>
     <?php endforeach; ?>
+
+    <!-- المدونة -->
+    <url>
+        <loc><?= $siteUrl ?>/blog</loc>
+        <changefreq>daily</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- تصنيفات المقالات -->
+    <?php
+    try {
+        $articleCats = $pdo->query("SELECT slug FROM article_categories WHERE is_active = 1")->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($articleCats as $cat):
+    ?>
+    <url>
+        <loc><?= $siteUrl ?>/blog?category=<?= $cat['slug'] ?></loc>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <?php
+        endforeach;
+    } catch (Exception $e) {
+        // Table may not exist yet
+    }
+    ?>
+
+    <!-- المقالات -->
+    <?php
+    try {
+        $articles = $pdo->query("
+            SELECT slug, featured_image, title, updated_at
+            FROM articles
+            WHERE status = 'published'
+            ORDER BY published_at DESC
+            LIMIT 5000
+        ")->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($articles as $article):
+            $lastmod = date('Y-m-d', strtotime($article['updated_at']));
+    ?>
+    <url>
+        <loc><?= $siteUrl ?>/blog/<?= $article['slug'] ?></loc>
+        <lastmod><?= $lastmod ?></lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.7</priority>
+        <?php if ($article['featured_image']): ?>
+        <image:image>
+            <image:loc><?= $siteUrl ?>/uploads/articles/<?= htmlspecialchars($article['featured_image']) ?></image:loc>
+            <image:title><?= htmlspecialchars($article['title']) ?></image:title>
+        </image:image>
+        <?php endif; ?>
+    </url>
+    <?php
+        endforeach;
+    } catch (Exception $e) {
+        // Table may not exist yet
+    }
+    ?>
+
+    <!-- الصفحات الثابتة من قاعدة البيانات -->
+    <?php
+    try {
+        $pages = $pdo->query("SELECT slug, updated_at FROM pages WHERE is_active = 1")->fetchAll(PDO::FETCH_ASSOC);
+        foreach ($pages as $page):
+            $lastmod = date('Y-m-d', strtotime($page['updated_at']));
+    ?>
+    <url>
+        <loc><?= $siteUrl ?>/page/<?= $page['slug'] ?></loc>
+        <lastmod><?= $lastmod ?></lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.5</priority>
+    </url>
+    <?php
+        endforeach;
+    } catch (Exception $e) {
+        // Table may not exist yet
+    }
+    ?>
 
 </urlset>
