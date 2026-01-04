@@ -149,6 +149,25 @@
         </li>
 
         <li class="nav-item mt-2">
+            <small class="text-white-50 px-4">المدونة</small>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'articles.php' ? 'active' : '' ?>" href="articles.php">
+                <i class="fas fa-newspaper"></i> المقالات
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'article-add.php' ? 'active' : '' ?>" href="article-add.php">
+                <i class="fas fa-pen"></i> مقال جديد
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'article-categories.php' ? 'active' : '' ?>" href="article-categories.php">
+                <i class="fas fa-folder"></i> تصنيفات المقالات
+            </a>
+        </li>
+
+        <li class="nav-item mt-2">
             <small class="text-white-50 px-4">أدوات المحتوى</small>
         </li>
         <li class="nav-item">

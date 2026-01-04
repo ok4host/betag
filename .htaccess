@@ -34,6 +34,13 @@ RewriteRule ^contact/?$ pages/contact.php [L]
 RewriteRule ^privacy/?$ pages/privacy.php [L]
 RewriteRule ^terms/?$ pages/terms.php [L]
 
+# Blog pages
+RewriteRule ^blog/?$ pages/blog.php [L,QSA]
+RewriteRule ^blog/([a-zA-Z0-9-]+)/?$ pages/article.php?slug=$1 [L,QSA]
+
+# Dynamic page
+RewriteRule ^page/([a-zA-Z0-9-]+)/?$ pages/page.php?slug=$1 [L,QSA]
+
 # User pages
 RewriteRule ^favorites/?$ pages/favorites.php [L]
 RewriteRule ^login/?$ pages/login.php [L]
