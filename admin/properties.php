@@ -104,6 +104,9 @@ include __DIR__ . '/includes/header.php';
     <div class="card">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5 class="mb-0">العقارات (<?= count($properties) ?>)</h5>
+            <a href="property-add.php" class="btn btn-primary btn-sm">
+                <i class="fas fa-plus me-1"></i>إضافة عقار
+            </a>
         </div>
         <div class="card-body p-0">
             <div class="table-responsive">
@@ -132,7 +135,7 @@ include __DIR__ . '/includes/header.php';
                                     <img src="/uploads/properties/<?= $prop['featured_image'] ?>" alt="" width="50" height="40" class="rounded object-fit-cover">
                                     <?php endif; ?>
                                     <div>
-                                        <a href="property-edit.php?id=<?= $prop['id'] ?>" class="text-decoration-none fw-bold">
+                                        <a href="property-add.php?id=<?= $prop['id'] ?>" class="text-decoration-none fw-bold">
                                             <?= mb_substr(htmlspecialchars($prop['title']), 0, 40) ?>
                                         </a>
                                         <?php if ($prop['is_featured']): ?>
@@ -170,7 +173,7 @@ include __DIR__ . '/includes/header.php';
                                         إجراءات
                                     </button>
                                     <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="property-edit.php?id=<?= $prop['id'] ?>"><i class="fas fa-edit me-2"></i>تعديل</a></li>
+                                        <li><a class="dropdown-item" href="property-add.php?id=<?= $prop['id'] ?>"><i class="fas fa-edit me-2"></i>تعديل</a></li>
                                         <li><a class="dropdown-item" href="/property/<?= $prop['slug'] ?>" target="_blank"><i class="fas fa-eye me-2"></i>عرض</a></li>
                                         <li><hr class="dropdown-divider"></li>
                                         <?php if ($prop['status'] === 'pending'): ?>
