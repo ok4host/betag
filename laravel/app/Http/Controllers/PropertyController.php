@@ -31,23 +31,21 @@ class PropertyController extends Controller
         }
 
         // Filter by price range
-        $query->priceRange($request->min_price, $request->max_price);
-
-        // Filter by area range
-        $query->areaRange($request->min_area, $request->max_area);
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
 
         // Filter by bedrooms
         if ($request->filled('bedrooms')) {
-            $query->withBedrooms($request->bedrooms);
+            $query->where('bedrooms', '>=', $request->bedrooms);
         }
 
-        // Search by keyword
-        if ($request->filled('q')) {
-            $query->where(function ($q) use ($request) {
-                $q->where('title', 'like', "%{$request->q}%")
-                    ->orWhere('description', 'like', "%{$request->q}%")
-                    ->orWhere('address', 'like', "%{$request->q}%");
-            });
+        // Filter by bathrooms
+        if ($request->filled('bathrooms')) {
+            $query->where('bathrooms', '>=', $request->bathrooms);
         }
 
         // Sort
@@ -55,8 +53,6 @@ class PropertyController extends Controller
         match ($sort) {
             'price_low' => $query->orderBy('price', 'asc'),
             'price_high' => $query->orderBy('price', 'desc'),
-            'area_low' => $query->orderBy('area', 'asc'),
-            'area_high' => $query->orderBy('area', 'desc'),
             default => $query->latest(),
         };
 
@@ -65,26 +61,101 @@ class PropertyController extends Controller
         $categories = Category::active()->ordered()->get();
         $locations = Location::active()->whereIn('type', ['city', 'area'])->get();
 
-        return view('pages.search', compact('properties', 'categories', 'locations'));
+        return view('properties.index', compact('properties', 'categories', 'locations'));
     }
 
-    public function show($slug)
+    public function sale(Request $request)
+    {
+        $query = Property::with(['category', 'location'])
+            ->active()
+            ->where('type', 'sale');
+
+        // Apply filters
+        if ($request->filled('category')) {
+            $query->whereHas('category', fn($q) => $q->where('slug', $request->category));
+        }
+        if ($request->filled('location')) {
+            $query->whereHas('location', fn($q) => $q->where('slug', $request->location));
+        }
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+        if ($request->filled('bedrooms')) {
+            $query->where('bedrooms', '>=', $request->bedrooms);
+        }
+
+        $sort = $request->get('sort', 'latest');
+        match ($sort) {
+            'price_low' => $query->orderBy('price', 'asc'),
+            'price_high' => $query->orderBy('price', 'desc'),
+            default => $query->latest(),
+        };
+
+        $properties = $query->paginate(12)->withQueryString();
+        $categories = Category::active()->ordered()->get();
+        $locations = Location::active()->whereIn('type', ['city', 'area'])->get();
+
+        return view('properties.index', compact('properties', 'categories', 'locations'));
+    }
+
+    public function rent(Request $request)
+    {
+        $query = Property::with(['category', 'location'])
+            ->active()
+            ->where('type', 'rent');
+
+        // Apply filters
+        if ($request->filled('category')) {
+            $query->whereHas('category', fn($q) => $q->where('slug', $request->category));
+        }
+        if ($request->filled('location')) {
+            $query->whereHas('location', fn($q) => $q->where('slug', $request->location));
+        }
+        if ($request->filled('min_price')) {
+            $query->where('price', '>=', $request->min_price);
+        }
+        if ($request->filled('max_price')) {
+            $query->where('price', '<=', $request->max_price);
+        }
+        if ($request->filled('bedrooms')) {
+            $query->where('bedrooms', '>=', $request->bedrooms);
+        }
+
+        $sort = $request->get('sort', 'latest');
+        match ($sort) {
+            'price_low' => $query->orderBy('price', 'asc'),
+            'price_high' => $query->orderBy('price', 'desc'),
+            default => $query->latest(),
+        };
+
+        $properties = $query->paginate(12)->withQueryString();
+        $categories = Category::active()->ordered()->get();
+        $locations = Location::active()->whereIn('type', ['city', 'area'])->get();
+
+        return view('properties.index', compact('properties', 'categories', 'locations'));
+    }
+
+    public function show($locale, $slug)
     {
         $property = Property::with(['category', 'location', 'user'])
             ->where('slug', $slug)
             ->active()
             ->firstOrFail();
 
-        $property->incrementViews();
+        // Increment views
+        $property->increment('views');
 
-        $similarProperties = Property::with(['category', 'location'])
+        $relatedProperties = Property::with(['category', 'location'])
             ->active()
             ->where('id', '!=', $property->id)
             ->where('category_id', $property->category_id)
             ->take(4)
             ->get();
 
-        return view('pages.property', compact('property', 'similarProperties'));
+        return view('properties.show', compact('property', 'relatedProperties'));
     }
 
     public function create()

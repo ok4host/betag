@@ -40,19 +40,19 @@ Route::group([
         Route::get('/', [PropertyController::class, 'index'])->name('index');
         Route::get('/sale', [PropertyController::class, 'sale'])->name('sale');
         Route::get('/rent', [PropertyController::class, 'rent'])->name('rent');
-        Route::get('/{property:slug}', [PropertyController::class, 'show'])->name('show');
+        Route::get('/{slug}', [PropertyController::class, 'show'])->name('show');
     });
 
     // Compounds
     Route::prefix('compounds')->name('compounds.')->group(function () {
         Route::get('/', [CompoundController::class, 'index'])->name('index');
-        Route::get('/{compound:slug}', [CompoundController::class, 'show'])->name('show');
+        Route::get('/{slug}', [CompoundController::class, 'show'])->name('show');
     });
 
     // Blog
     Route::prefix('blog')->name('blog.')->group(function () {
         Route::get('/', [BlogController::class, 'index'])->name('index');
-        Route::get('/{article:slug}', [BlogController::class, 'show'])->name('show');
+        Route::get('/{slug}', [BlogController::class, 'show'])->name('show');
     });
 
     // Static Pages

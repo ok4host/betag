@@ -41,7 +41,7 @@ class BlogController extends Controller
         return view('pages.blog', compact('articles', 'categories', 'popularArticles'));
     }
 
-    public function show($slug)
+    public function show($locale, $slug)
     {
         $article = Article::with(['category', 'author'])
             ->published()

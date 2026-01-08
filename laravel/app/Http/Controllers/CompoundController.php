@@ -43,7 +43,7 @@ class CompoundController extends Controller
         return view('pages.compounds', compact('compounds', 'locations'));
     }
 
-    public function show($slug)
+    public function show($locale, $slug)
     {
         $compound = Location::compounds()
             ->active()
