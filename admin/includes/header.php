@@ -97,16 +97,39 @@
         <small class="opacity-75">لوحة التحكم</small>
     </div>
 
-    <ul class="nav flex-column mt-3">
+    <ul class="nav flex-column mt-3" style="overflow-y:auto; max-height:calc(100vh - 200px);">
         <li class="nav-item">
             <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'index.php' ? 'active' : '' ?>" href="index.php">
                 <i class="fas fa-home"></i> الرئيسية
             </a>
         </li>
+
+        <li class="nav-item mt-2">
+            <small class="text-white-50 px-4">العقارات</small>
+        </li>
         <li class="nav-item">
             <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'properties.php' ? 'active' : '' ?>" href="properties.php">
-                <i class="fas fa-building"></i> العقارات
+                <i class="fas fa-building"></i> جميع العقارات
             </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'property-add.php' ? 'active' : '' ?>" href="property-add.php">
+                <i class="fas fa-plus-circle"></i> إضافة عقار
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'categories.php' ? 'active' : '' ?>" href="categories.php">
+                <i class="fas fa-tags"></i> الفئات
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'locations.php' ? 'active' : '' ?>" href="locations.php">
+                <i class="fas fa-map-marker-alt"></i> المناطق
+            </a>
+        </li>
+
+        <li class="nav-item mt-2">
+            <small class="text-white-50 px-4">العملاء</small>
         </li>
         <li class="nav-item">
             <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'leads.php' ? 'active' : '' ?>" href="leads.php">
@@ -124,13 +147,41 @@
                 <i class="fas fa-users"></i> المستخدمين
             </a>
         </li>
+
+        <li class="nav-item mt-2">
+            <small class="text-white-50 px-4">المدونة</small>
+        </li>
         <li class="nav-item">
-            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'locations.php' ? 'active' : '' ?>" href="locations.php">
-                <i class="fas fa-map-marker-alt"></i> المناطق
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'articles.php' ? 'active' : '' ?>" href="articles.php">
+                <i class="fas fa-newspaper"></i> المقالات
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'article-add.php' ? 'active' : '' ?>" href="article-add.php">
+                <i class="fas fa-pen"></i> مقال جديد
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'article-categories.php' ? 'active' : '' ?>" href="article-categories.php">
+                <i class="fas fa-folder"></i> تصنيفات المقالات
             </a>
         </li>
 
-        <li class="nav-item mt-3">
+        <li class="nav-item mt-2">
+            <small class="text-white-50 px-4">أدوات المحتوى</small>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'ai-prompts.php' ? 'active' : '' ?>" href="ai-prompts.php">
+                <i class="fas fa-robot"></i> بروميتات AI
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'scraping.php' ? 'active' : '' ?>" href="scraping.php">
+                <i class="fas fa-file-import"></i> استيراد البيانات
+            </a>
+        </li>
+
+        <li class="nav-item mt-2">
             <small class="text-white-50 px-4">الإعدادات</small>
         </li>
         <li class="nav-item">
@@ -141,6 +192,11 @@
         <li class="nav-item">
             <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'pages.php' ? 'active' : '' ?>" href="pages.php">
                 <i class="fas fa-file-alt"></i> الصفحات
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link <?= basename($_SERVER['PHP_SELF']) === 'ai-settings.php' ? 'active' : '' ?>" href="ai-settings.php">
+                <i class="fas fa-brain"></i> إعدادات AI
             </a>
         </li>
         <li class="nav-item">

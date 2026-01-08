@@ -1,4 +1,4 @@
-# BeTaj Real Estate - Apache Configuration
+# BeTaj Real Estate - Apache Configuration with Multi-language Support
 
 # Enable Rewrite Engine
 RewriteEngine On
@@ -10,43 +10,104 @@ RewriteEngine On
 # Remove .php extension
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
-RewriteRule ^([^\.]+)$ $1.php [NC,L]
+RewriteRule ^([^\\.]+)$ $1.php [NC,L]
 
-# Property detail page
-RewriteRule ^property/([a-zA-Z0-9-]+)/?$ pages/property.php?slug=$1 [L,QSA]
+# ==========================================
+# Multi-language URL Routing
+# ==========================================
+
+# Redirect root to default language (Arabic)
+RewriteRule ^$ /ar/ [R=302,L]
+
+# Language prefix handling (ar/en)
+RewriteRule ^(ar|en)/?$ index.php?lang=$1 [L,QSA]
+
+# Property detail page with language
+RewriteRule ^(ar|en)/property/([a-zA-Z0-9-]+)/?$ pages/property.php?lang=$1&slug=$2 [L,QSA]
 
 # Search with filters
-RewriteRule ^search/?$ pages/search.php [L,QSA]
-RewriteRule ^sale/?$ pages/search.php?type=sale [L,QSA]
-RewriteRule ^rent/?$ pages/search.php?type=rent [L,QSA]
+RewriteRule ^(ar|en)/search/?$ pages/search.php?lang=$1 [L,QSA]
+RewriteRule ^(ar|en)/sale/?$ pages/search.php?lang=$1&type=sale [L,QSA]
+RewriteRule ^(ar|en)/rent/?$ pages/search.php?lang=$1&type=rent [L,QSA]
 
 # Location pages
-RewriteRule ^location/([a-zA-Z0-9-]+)/?$ pages/search.php?location=$1 [L,QSA]
+RewriteRule ^(ar|en)/location/([a-zA-Z0-9-]+)/?$ pages/search.php?lang=$1&location=$2 [L,QSA]
 
 # Category pages
-RewriteRule ^category/([a-zA-Z0-9-]+)/?$ pages/search.php?category=$1 [L,QSA]
+RewriteRule ^(ar|en)/category/([a-zA-Z0-9-]+)/?$ pages/search.php?lang=$1&category=$2 [L,QSA]
+
+# Static pages with language
+RewriteRule ^(ar|en)/compounds/?$ pages/compounds.php?lang=$1 [L]
+RewriteRule ^(ar|en)/new-projects/?$ pages/new-projects.php?lang=$1 [L]
+RewriteRule ^(ar|en)/about/?$ pages/about.php?lang=$1 [L]
+RewriteRule ^(ar|en)/contact/?$ pages/contact.php?lang=$1 [L]
+RewriteRule ^(ar|en)/privacy/?$ pages/privacy.php?lang=$1 [L]
+RewriteRule ^(ar|en)/terms/?$ pages/terms.php?lang=$1 [L]
+
+# Blog pages with language
+RewriteRule ^(ar|en)/blog/?$ pages/blog.php?lang=$1 [L,QSA]
+RewriteRule ^(ar|en)/blog/([a-zA-Z0-9-]+)/?$ pages/article.php?lang=$1&slug=$2 [L,QSA]
+
+# Dynamic page with language
+RewriteRule ^(ar|en)/page/([a-zA-Z0-9-]+)/?$ pages/page.php?lang=$1&slug=$2 [L,QSA]
+
+# User pages with language
+RewriteRule ^(ar|en)/favorites/?$ pages/favorites.php?lang=$1 [L]
+RewriteRule ^(ar|en)/login/?$ pages/login.php?lang=$1 [L]
+RewriteRule ^(ar|en)/register/?$ pages/register.php?lang=$1 [L]
+RewriteRule ^(ar|en)/logout/?$ pages/logout.php?lang=$1 [L]
+RewriteRule ^(ar|en)/add-property/?$ pages/add-property.php?lang=$1 [L]
+RewriteRule ^(ar|en)/my-properties/?$ pages/my-properties.php?lang=$1 [L]
+RewriteRule ^(ar|en)/profile/?$ pages/profile.php?lang=$1 [L]
+
+# ==========================================
+# Legacy URLs (without language prefix) - Redirect to Arabic
+# ==========================================
+
+# Property detail page (redirect to Arabic)
+RewriteRule ^property/([a-zA-Z0-9-]+)/?$ /ar/property/$1 [R=301,L]
+
+# Search pages
+RewriteRule ^search/?$ /ar/search [R=301,L,QSA]
+RewriteRule ^sale/?$ /ar/sale [R=301,L,QSA]
+RewriteRule ^rent/?$ /ar/rent [R=301,L,QSA]
+
+# Location and category pages
+RewriteRule ^location/([a-zA-Z0-9-]+)/?$ /ar/location/$1 [R=301,L,QSA]
+RewriteRule ^category/([a-zA-Z0-9-]+)/?$ /ar/category/$1 [R=301,L,QSA]
 
 # Static pages
-RewriteRule ^compounds/?$ pages/compounds.php [L]
-RewriteRule ^new-projects/?$ pages/new-projects.php [L]
-RewriteRule ^about/?$ pages/about.php [L]
-RewriteRule ^contact/?$ pages/contact.php [L]
-RewriteRule ^privacy/?$ pages/privacy.php [L]
-RewriteRule ^terms/?$ pages/terms.php [L]
+RewriteRule ^compounds/?$ /ar/compounds [R=301,L]
+RewriteRule ^new-projects/?$ /ar/new-projects [R=301,L]
+RewriteRule ^about/?$ /ar/about [R=301,L]
+RewriteRule ^contact/?$ /ar/contact [R=301,L]
+RewriteRule ^privacy/?$ /ar/privacy [R=301,L]
+RewriteRule ^terms/?$ /ar/terms [R=301,L]
+
+# Blog pages
+RewriteRule ^blog/?$ /ar/blog [R=301,L,QSA]
+RewriteRule ^blog/([a-zA-Z0-9-]+)/?$ /ar/blog/$1 [R=301,L]
 
 # User pages
-RewriteRule ^favorites/?$ pages/favorites.php [L]
-RewriteRule ^login/?$ pages/login.php [L]
-RewriteRule ^register/?$ pages/register.php [L]
-RewriteRule ^add-property/?$ pages/add-property.php [L]
-RewriteRule ^my-properties/?$ pages/my-properties.php [L]
-RewriteRule ^profile/?$ pages/profile.php [L]
+RewriteRule ^favorites/?$ /ar/favorites [R=301,L]
+RewriteRule ^login/?$ /ar/login [R=301,L]
+RewriteRule ^register/?$ /ar/register [R=301,L]
+RewriteRule ^add-property/?$ /ar/add-property [R=301,L]
+RewriteRule ^my-properties/?$ /ar/my-properties [R=301,L]
+RewriteRule ^profile/?$ /ar/profile [R=301,L]
 
-# API endpoints
+# ==========================================
+# API endpoints (no language prefix needed)
+# ==========================================
 RewriteRule ^api/leads/?$ api/leads.php [L]
 RewriteRule ^api/properties/?$ api/properties.php [L]
 RewriteRule ^api/favorites/?$ api/favorites.php [L]
 RewriteRule ^api/ai/?$ api/ai.php [L]
+RewriteRule ^api/newsletter/?$ api/newsletter.php [L]
+
+# ==========================================
+# Security & Performance
+# ==========================================
 
 # Prevent directory listing
 Options -Indexes
@@ -56,6 +117,7 @@ Options -Indexes
     Header set X-Content-Type-Options "nosniff"
     Header set X-Frame-Options "SAMEORIGIN"
     Header set X-XSS-Protection "1; mode=block"
+    Header set Referrer-Policy "strict-origin-when-cross-origin"
 </IfModule>
 
 # Cache static assets
@@ -65,17 +127,20 @@ Options -Indexes
     ExpiresByType image/jpeg "access plus 1 month"
     ExpiresByType image/png "access plus 1 month"
     ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
     ExpiresByType text/css "access plus 1 week"
     ExpiresByType application/javascript "access plus 1 week"
+    ExpiresByType font/woff2 "access plus 1 month"
+    ExpiresByType font/woff "access plus 1 month"
 </IfModule>
 
 # Compress text files
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json text/xml application/xml
 </IfModule>
 
 # Block sensitive files
-<FilesMatch "(^\.ht|config\.php|schema\.sql)">
+<FilesMatch "(^\\.ht|config\\.php|schema\\.sql|\\.env)">
     Order allow,deny
     Deny from all
 </FilesMatch>
