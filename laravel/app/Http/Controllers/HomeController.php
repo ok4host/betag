@@ -30,10 +30,16 @@ class HomeController extends Controller
             ->ordered()
             ->get();
 
-        $popularLocations = Location::active()
+        $locations = Location::active()
             ->whereIn('type', ['city', 'area'])
             ->withCount(['properties' => fn($q) => $q->active()])
             ->orderByDesc('properties_count')
+            ->take(6)
+            ->get();
+
+        $featuredCompounds = Location::active()
+            ->where('type', 'compound')
+            ->featured()
             ->take(6)
             ->get();
 
@@ -47,7 +53,8 @@ class HomeController extends Controller
             'featuredProperties',
             'latestProperties',
             'categories',
-            'popularLocations',
+            'locations',
+            'featuredCompounds',
             'latestArticles'
         ));
     }
