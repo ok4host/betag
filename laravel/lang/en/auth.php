@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'login' => 'Login',
+    'login_subtitle' => 'Welcome back! Login to continue',
+    'email' => 'Email',
+    'password' => 'Password',
+    'remember' => 'Remember me',
+    'forgot_password' => 'Forgot password?',
+    'login_btn' => 'Login',
+    'no_account' => "Don't have an account?",
+    'register_now' => 'Register now',
+    'register' => 'Register',
+    'register_subtitle' => 'Create your account to access all features',
+    'name' => 'Name',
+    'phone' => 'Phone',
+    'password_confirm' => 'Confirm Password',
+    'agree_to' => 'By registering, you agree to',
+    'terms' => 'Terms and Conditions',
+    'register_btn' => 'Create Account',
+    'have_account' => 'Already have an account?',
+    'login_now' => 'Login now',
+    'failed' => 'These credentials do not match our records.',
+    'password_incorrect' => 'The provided password is incorrect.',
+    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+];

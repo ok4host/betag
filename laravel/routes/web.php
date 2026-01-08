@@ -21,6 +21,22 @@ use Illuminate\Support\Facades\Route;
 Route::get('language/{locale}', function ($locale) {
     if (in_array($locale, ['ar', 'en'])) {
         session()->put('locale', $locale);
+        app()->setLocale($locale);
+
+        // Get the previous URL and replace the locale
+        $previousUrl = url()->previous();
+        $parsedUrl = parse_url($previousUrl);
+        $path = $parsedUrl['path'] ?? '/';
+
+        // Replace the locale in the path
+        $newPath = preg_replace('#^/(ar|en)#', '/' . $locale, $path);
+
+        // If no locale was in the path, add it
+        if ($newPath === $path && !preg_match('#^/(ar|en)#', $path)) {
+            $newPath = '/' . $locale . $path;
+        }
+
+        return redirect($newPath);
     }
     return redirect()->back();
 })->name('language.switch');
