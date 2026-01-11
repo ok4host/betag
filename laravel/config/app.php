@@ -125,11 +125,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        /*
-         * Filament Admin Panel Provider
-         */
-        App\Providers\Filament\AdminPanelProvider::class,
-
     ],
 
     /*
